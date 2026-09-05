@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SampleMenu from '~/pages/sampleMenu.vue';
+import Sample from '~/pages/sample.vue';
 
 
 </script>
@@ -14,15 +14,14 @@ import SampleMenu from '~/pages/sampleMenu.vue';
       <!-- Centerpiece 3D Smartphone Mockup -->
       <div class="relative py-6 justify-center items-center mx-auto">
         
-        <h1 class="text-2xl font-extrabold text-white uppercase">
-          Digital infrastructure<br> for Ethiopian hospitality<br/>
+        <h1 class="text-2xl font-extrabold text-white uppercase leading-[0.75]">
+          Digital infrastructure<br> <span class="text-[15px]">for Ethiopian hospitality</span><br/>
           <!--<span class="font-bold block sm:inline-block bg-clip-text text-transparent bg-linear-to-r from-brand-400 via-emerald-200 to-amber-400">ዲጂታል የምግብ ዝርዝሮች</span><br>-->
         </h1>
         <p class="text-xs my-4 bg-clip-text text-transparent bg-linear-to-r from-brand-400 via-emerald-200 to-amber-400 uppercase tracking-widest font-semibold">
           Create Appetite. Eliminate Printing Costs.<br/>Digitalize Your Restaurant.
         </p>
         
-
         <!-- Floating Accent Label - Left -->
         <div class="absolute left-8 top-1/2 z-20 items-center space-x-3 bg-obsidian-900/90 border border-brand-500/30 px-4 py-3 rounded-2xl shadow-2xl backdrop-blur-md animate-float">
           <div class="w-3 h-3 rounded-full bg-brand-400"></div>
@@ -43,8 +42,8 @@ import SampleMenu from '~/pages/sampleMenu.vue';
 
         <!-- The Smartphone Container (Redirects to menu.html on click) -->
         <div class="items-center">
-        <a href="/sampleMenu">
-        <NuxtLink :to="SampleMenu">
+        
+        <NuxtLink to="Sample">
         <div 
           class="phone-body cursor-pointer relative w-[280px] h-[570px] bg-black rounded-[48px] p-3 border-[2px] border-zinc-700/80 group overflow-hidden select-none mx-auto"
         >
@@ -116,7 +115,7 @@ import SampleMenu from '~/pages/sampleMenu.vue';
                 </div>
               </div>
             </div>
-
+            
             <!-- Tap Overlay Trigger Callout inside Phone Screen -->
             <div class="z-20 text-black! w-full py-2.5 bg-linear-to-r from-brand-500 to-amber-500 rounded-xl  font-black text-[10px] uppercase tracking-widest text-center shadow-lg group-hover:brightness-110 transition-all flex items-center justify-center space-x-2">
               <span >Touch Screen to Open</span>
@@ -128,13 +127,14 @@ import SampleMenu from '~/pages/sampleMenu.vue';
 
           </div>
         </div>
-      </NuxtLink></a></div>
+      </NuxtLink></div>
       <!-- Action Button below Hero Mockup -->
-        <div class="pt-2 mt-12">
-          <a href="/sampleMenu"><NuxtLink :to="SampleMenu" class="hover:bg-black inline-block bg-brand-400 text-black hover:text-brand-400 border border-brand-500/30 font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl">
-            Explore Sample Menu
-          </NuxtLink></a>
-        </div> 
+      <NuxtLink to="Sample">
+        <h1 class="inline-block justify-center items-center w-48 space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95 hover:text-black border border-brand-500/30 text-xs ">
+        Explore Sample</h1>
+      </NuxtLink>
+
+
       <section class="text-2xl font-black text-brand-400 tracking-tight mt-20 mb-4 px-3 max-w-xl mx-auto">
           <div class="grid grid-cols-4 gap-1">
             

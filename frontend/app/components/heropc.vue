@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Sample from '~/pages/sample.vue';
+
 </script>
 
 <template><!-- Hero Section -->
@@ -20,13 +22,17 @@
           Create Appetite. Eliminate Printing Costs.<br/>Digitalize Your Restaurant.
         </p>
         <!-- Action Button below Hero Mockup -->
-        <div class="pt-2">
-          <a href="/sampleMenu">
-          <NuxtLink :to="SampleMenu" class="hover:bg-black inline-block bg-brand-400 text-black hover:text-brand-400 border border-brand-500/30 font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl">
-            Explore Sample Menu
+        <div class="flex gap-4">
+          <NuxtLink to="Sample">
+            <h1 class="items-center w-48 space-x-4 shimmer-button bg-black hover:bg-brand-700 text-center text-brand-500 font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95 hover:text-black border border-brand-500/30 text-xs ">
+            About Us</h1>
           </NuxtLink>
-          </a>
+          <NuxtLink to="Sample">
+            <h1 class="items-center w-48 space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95 hover:text-black border border-brand-500/30 text-xs ">
+            Explore Sample</h1>
+          </NuxtLink>
         </div>
+        
 
 
         <section class="text-2xl sm:text-4xl font-black text-brand-400 tracking-tight mt-16">
@@ -78,7 +84,7 @@
 
         <!-- The Smartphone Container (Redirects to menu.html on click) -->
         <a href="/sampleMenu">
-        <NuxtLink :to="SampleMenu">
+        <NuxtLink to="Sample">
         <div 
           class="phone-body cursor-pointer relative w-[280px] sm:w-[310px] h-[570px] bg-zinc-950 rounded-[48px] p-3 border-[4px] border-zinc-700/80 group overflow-hidden select-none"
         >

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SampleMenu from '~/pages/sample.vue';
+
 </script>
 
 <template>
@@ -15,10 +17,13 @@
       </a>
 
       <!-- Primary Action CTA -->
-      <NuxtLink :to="SampleMenu">
-      <a href="../pages/sampleMenu">
-                <h1 class="flex items-center space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">Look at sample</h1>
-      </a></NuxtLink>
+      <NuxtLink to="sample">
+      
+      <a href="../pages/sample.vue">
+        <h1 class="flex items-center space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">Look at sample</h1>
+      </a>
+
+      </NuxtLink>
     </div>
   </header>
 </template>

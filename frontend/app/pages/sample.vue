@@ -4,7 +4,7 @@
     <header class="sticky top-0 z-40 bg-[#050806]/95 backdrop-blur-md border-b border-emerald-950/40 px-4 py-3.5 md:px-8">
       <div class="max-w-7xl mx-auto flex sm:flex-row items-center justify-between gap-4">
         
-        <NuxtLink to="/">
+        <NuxtLink to="">
           <div class="flex items-center space-x-3 self-start sm:self-center min-w-[150px]">
             <div class="h-10 w-10 md:h-12 md:w-12 p-[3px] shadow-lg shadow-emerald-950/50">
               <div class="w-full h-full flex items-center justify-center">
