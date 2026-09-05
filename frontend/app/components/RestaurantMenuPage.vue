@@ -34,10 +34,10 @@
             </svg>
             <input 
               type="text" 
-              :placeholder="t('searchPlaceholder')" 
+              :placeholder="showingDirectory ? (lang === 'am' ? 'ምግብ ቤት ፈልግ...' : 'Search restaurants...') : t('searchPlaceholder')" 
               v-model="searchQuery"
-              @input="scrollToMenu"
-              @focus="scrollToMenu"
+              @input="showingDirectory ? undefined : scrollToMenu()"
+              @focus="showingDirectory ? undefined : scrollToMenu()"
               class="w-full bg-[#0d1410] border border-emerald-950/80 text-white placeholder-zinc-500 rounded-lg py-2.5 pl-10 pr-10 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition text-sm"
             />
             <button 
@@ -82,11 +82,88 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-4 py-6 md:py-8 md:px-8 flex-grow w-full">
+
+      <!-- Restaurant directory (no restaurant selected) -->
+      <div v-if="showingDirectory" class="w-full">
+        <div class="mb-8">
+          <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">Browse</p>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase tracking-tight">Restaurants</h2>
+          <p class="text-zinc-400 text-sm mt-2 max-w-xl">Choose a restaurant to open its digital menu and place an order.</p>
+        </div>
+
+        <div v-if="directoryLoading" class="py-20 text-center text-zinc-400 text-sm">
+          Loading restaurants…
+        </div>
+
+        <div v-else-if="directoryError" class="py-16 text-center bg-[#0d1410] border border-red-900/40 rounded-2xl px-4">
+          <p class="text-red-400 text-sm mb-4">{{ directoryError }}</p>
+          <button
+            type="button"
+            @click="loadRestaurantDirectory"
+            class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-extrabold rounded-xl cursor-pointer"
+          >Retry</button>
+        </div>
+
+        <div v-else-if="filteredDirectory.length === 0" class="py-16 text-center bg-[#0d1410] border border-emerald-950/60 rounded-2xl px-4">
+          <p class="text-zinc-300 text-sm font-semibold">{{ restaurantDirectory.length === 0 ? 'No restaurants available yet.' : 'No restaurants match your search.' }}</p>
+        </div>
+
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <NuxtLink
+            v-for="r in filteredDirectory"
+            :key="restaurantRouteId(r)"
+            :to="`/menu/${restaurantRouteId(r)}`"
+            class="group block bg-[#0d1410] border border-emerald-950/60 hover:border-emerald-600/70 rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-lg hover:shadow-emerald-950/20"
+          >
+            <div class="h-36 bg-[#080f0c] overflow-hidden relative">
+              <img
+                :src="(r.images && r.images[0]) || r.banner || r.logo || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800'"
+                :alt="restaurantDisplayName(r)"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-300"
+                @error="onImgError($event, 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800')"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0d1410] via-transparent to-transparent"></div>
+            </div>
+            <div class="p-4 flex items-start gap-3">
+              <img
+                :src="r.logo || '/assets/images/awaze_logo.png'"
+                :alt="restaurantDisplayName(r) + ' logo'"
+                class="h-11 w-11 object-cover rounded-lg bg-[#050806] border border-emerald-950 shrink-0"
+                @error="onImgError($event, 'https://placehold.co/100x100/0d1410/10b981?text=LOGO')"
+              />
+              <div class="min-w-0 flex-1">
+                <h3 class="text-white font-bold text-base truncate group-hover:text-emerald-300 transition-colors">{{ restaurantDisplayName(r) }}</h3>
+                <p v-if="restaurantDisplayNameAm(r)" class="text-emerald-400/80 text-sm truncate">{{ restaurantDisplayNameAm(r) }}</p>
+                <p v-if="r.location" class="text-zinc-500 text-xs mt-1 truncate">{{ r.location }}</p>
+                <p v-else-if="r.slogan" class="text-zinc-500 text-xs mt-1 truncate">{{ r.slogan }}</p>
+              </div>
+              <span class="text-emerald-500 text-xs font-bold self-center shrink-0 group-hover:translate-x-0.5 transition-transform">Open →</span>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Loading / not found for a specific restaurant -->
+      <div v-else-if="menuLoading" class="py-20 text-center text-zinc-400 text-sm">
+        Loading menu…
+      </div>
+
+      <div v-else-if="menuLoadError" class="py-16 text-center bg-[#0d1410] border border-emerald-950/60 rounded-2xl px-4 max-w-lg mx-auto">
+        <p class="text-zinc-200 font-semibold mb-2">{{ menuLoadError }}</p>
+        <p class="text-zinc-500 text-xs mb-5">Pick a restaurant from the list to continue.</p>
+        <NuxtLink
+          to="/menu"
+          class="inline-block px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-extrabold rounded-xl"
+        >View all restaurants</NuxtLink>
+      </div>
+
+      <template v-else>
       
       <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#0a140f] to-[#030604] border border-emerald-950/60 p-4 md:p-8 mb-4">
         <div class="absolute right-0 top-0 h-full w-1/3 opacity-15 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-400 via-transparent to-transparent"></div>
         <div class="relative z-10 max-w-2xl">
           <div class="flex items-center gap-4">
+            <NuxtLink to="/menu" class="text-zinc-500 hover:text-emerald-400 text-xs font-bold uppercase tracking-wider shrink-0 self-start mt-1">← All</NuxtLink>
             <img 
               :src="currentRestaurant.logo" 
               :alt="currentRestaurant.name + ' logo'"
@@ -214,24 +291,35 @@
             <div class="flex items-center justify-between pt-3 mt-3 border-t border-emerald-950/40">
               <div>
                 <span class="text-[10px] text-zinc-500 block uppercase font-semibold">{{ t('price') }}</span>
-                <span class="font-black text-emerald-400 text-base md:text-lg">{{ item.price.toLocaleString() }} Birr</span>
+                <span class="font-black text-emerald-400 text-base md:text-lg">{{ (Number(item.price) || 0).toLocaleString() }} Birr</span>
               </div>
 
-              <button 
-                type="button" 
-                @click.stop="selectItem(item)"
-                class="bg-emerald-950/60 hover:bg-emerald-800/80 text-emerald-400 hover:text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-900/60 flex items-center space-x-1 transition-colors"
-              >
-                <span>{{ t('details') }}</span>
-                <svg class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+              <div class="flex items-center gap-1.5">
+                <button 
+                  type="button" 
+                  @click.stop="triggerOrder(item)"
+                  class="bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black px-3 py-1.5 rounded-lg flex items-center space-x-1 transition-colors shadow-md cursor-pointer"
+                >
+                  <span>🛒 Order</span>
+                </button>
+                <button 
+                  type="button" 
+                  @click.stop="selectItem(item)"
+                  class="bg-emerald-950/60 hover:bg-emerald-800/80 text-emerald-400 hover:text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-900/60 flex items-center space-x-1 transition-colors cursor-pointer"
+                >
+                  <span>{{ t('details') }}</span>
+                  <svg class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
         </div>
       </div>
+
+      </template>
 
     </main>
 
@@ -297,7 +385,7 @@
             
             <div class="mt-3 flex items-baseline gap-2">
               <span class="text-xs text-zinc-400 uppercase font-semibold">{{ t('price') }}:</span>
-              <span class="text-2xl md:text-3xl font-black text-emerald-400">{{ selectedItem.price.toLocaleString() }} Birr</span>
+              <span class="text-2xl md:text-3xl font-black text-emerald-400">{{ (Number(selectedItem.price) || 0).toLocaleString() }} Birr</span>
             </div>
           </div>
 
@@ -372,26 +460,26 @@
             >
               <div class="flex items-start gap-3">
                 <div class="w-10 h-10 rounded-full bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-400 font-bold shrink-0">
-                  <span>{{ getLatestComment(selectedItem).author ? getLatestComment(selectedItem).author.charAt(0).toUpperCase() : '⭐' }}</span>
+                  <span>{{ getLatestComment(selectedItem)?.author ? getLatestComment(selectedItem).author.charAt(0).toUpperCase() : '⭐' }}</span>
                 </div>
                 <div>
                   <div class="flex items-center gap-2">
-                    <span class="font-bold text-xs text-white">{{ getLatestComment(selectedItem).author }}</span>
-                    <span class="text-[10px] text-zinc-400">{{ getLatestComment(selectedItem).date }}</span>
+                    <span class="font-bold text-xs text-white">{{ getLatestComment(selectedItem)?.author || 'Anonymous' }}</span>
+                    <span class="text-[10px] text-zinc-400">{{ getLatestComment(selectedItem)?.date || '' }}</span>
                   </div>
                   <div class="flex items-center space-x-1 text-amber-400 my-0.5">
                     <svg 
                       v-for="i in 5" 
                       :key="i"
                       class="h-3 w-3" 
-                      :class="i <= getLatestComment(selectedItem).rating ? 'fill-amber-400 text-amber-400' : 'text-zinc-600'" 
+                      :class="i <= (getLatestComment(selectedItem)?.rating || 5) ? 'fill-amber-400 text-amber-400' : 'text-zinc-600'" 
                       viewBox="0 0 20 20" 
                       fill="currentColor"
                     >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   </div>
-                  <p class="text-xs text-zinc-300 italic line-clamp-1">{{ getLatestComment(selectedItem).text }}</p>
+                  <p class="text-xs text-zinc-300 italic line-clamp-1">{{ getLatestComment(selectedItem)?.text || 'No comments yet' }}</p>
                 </div>
               </div>
 
@@ -409,8 +497,14 @@
 
             <div class="flex items-center gap-2 w-full sm:w-auto">
               <button 
+                @click="triggerOrder(selectedItem)"
+                class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-950/40 shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
+              >
+                <span>🛒 Order Dish</span>
+              </button>
+              <button 
                 @click="closeModal"
-                class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-black font-extrabold text-xs px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-950/40 shrink-0 cursor-pointer"
+                class="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-bold text-xs px-6 py-3 rounded-lg transition shrink-0 cursor-pointer border border-zinc-800"
               >
                 {{ t('closeCard') }}
               </button>
@@ -528,7 +622,10 @@
       </div>
     </div>
 
-    <section class="max-w-7xl mx-auto px-4 md:px-8 py-12 w-full border-t border-emerald-950/40">
+    <section
+      v-if="!showingDirectory && !menuLoading && !menuLoadError && currentRestaurant.name"
+      class="max-w-7xl mx-auto px-4 md:px-8 py-12 w-full border-t border-emerald-950/40"
+    >
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#0d1410] border border-emerald-950/60 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
         
         <div class="absolute -left-20 -top-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -615,7 +712,10 @@
       </div>
     </section>
 
-    <footer class="mt-auto border-t border-emerald-950/40 bg-[#030504] py-12 px-4 md:px-8 text-xs text-zinc-400">
+    <footer
+      v-if="!showingDirectory && !menuLoading && !menuLoadError"
+      class="mt-auto border-t border-emerald-950/40 bg-[#030504] py-12 px-4 md:px-8 text-xs text-zinc-400"
+    >
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center space-x-3">
           <span class="font-extrabold text-sm tracking-tight text-white uppercase">{{ t('digitalMenu') }}</span>
@@ -633,6 +733,101 @@
       </div>
     </footer>
 
+    <!-- ORDER MODAL -->
+    <div 
+      v-if="openOrderModal && orderItem"
+      @click.self="openOrderModal = false"
+      class="fixed inset-0 z-[70] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+    >
+      <div class="bg-[#0d1410] border border-emerald-800/80 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+        <button 
+          @click="openOrderModal = false"
+          class="absolute top-4 right-4 text-zinc-400 hover:text-white font-bold text-lg"
+        >
+          ✕
+        </button>
+        <div v-if="!orderSuccess">
+          <div class="flex items-center gap-3 mb-4 pb-3 border-b border-emerald-950">
+            <span class="text-2xl">🍲</span>
+            <div>
+              <h3 class="font-bold text-white text-base">{{ getItemMainTitle(orderItem) }}</h3>
+              <span class="text-xs text-emerald-400 font-semibold">{{ (Number(orderItem.price) || 0).toLocaleString() }} Birr</span>
+            </div>
+          </div>
+
+          <form @submit.prevent="submitOrder" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 uppercase mb-1">Table Number</label>
+              <input 
+                type="number" 
+                v-model.number="orderForm.tableNumber" 
+                min="1"
+                max="100"
+                required 
+                class="w-full bg-[#050806] border border-emerald-950 text-white rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 uppercase mb-1">Quantity / Amount</label>
+              <div class="flex items-center gap-3">
+                <button 
+                  type="button" 
+                  @click="orderForm.quantity = Math.max(1, orderForm.quantity - 1)"
+                  class="w-10 h-10 bg-[#050806] border border-emerald-950 text-white font-bold rounded-xl text-sm hover:border-emerald-500 cursor-pointer"
+                >-</button>
+                <input 
+                  type="number" 
+                  v-model.number="orderForm.quantity" 
+                  min="1"
+                  required 
+                  class="w-20 text-center bg-[#050806] border border-emerald-950 text-white font-bold rounded-xl py-2 text-sm focus:outline-none focus:border-emerald-500"
+                />
+                <button 
+                  type="button" 
+                  @click="orderForm.quantity += 1"
+                  class="w-10 h-10 bg-[#050806] border border-emerald-950 text-white font-bold rounded-xl text-sm hover:border-emerald-500 cursor-pointer"
+                >+</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 uppercase mb-1">Notes / Special Instructions</label>
+              <textarea 
+                v-model="orderForm.notes" 
+                placeholder="e.g. Extra spicy, no onions, extra injera..." 
+                rows="3"
+                class="w-full bg-[#050806] border border-emerald-950 text-white placeholder-zinc-600 rounded-xl p-3 text-xs focus:outline-none focus:border-emerald-500 resize-none"
+              ></textarea>
+            </div>
+
+            <p v-if="orderError" class="text-xs text-red-400 bg-red-950/40 border border-red-900/50 rounded-xl px-3 py-2">
+              {{ orderError }}
+            </p>
+
+            <div class="pt-2 flex justify-end gap-2">
+              <button 
+                type="button" 
+                @click="openOrderModal = false"
+                class="px-4 py-2.5 bg-zinc-900 text-zinc-400 text-xs font-bold rounded-xl border border-zinc-800 cursor-pointer"
+              >Cancel</button>
+              <button 
+                type="submit"
+                :disabled="orderSubmitting"
+                class="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-60 disabled:cursor-not-allowed text-black text-xs font-extrabold rounded-xl transition shadow-lg shadow-emerald-950/50 cursor-pointer"
+              >{{ orderSubmitting ? 'Sending…' : 'Send Order to Kitchen' }}</button>
+            </div>
+          </form>
+        </div>
+
+        <div v-else class="text-center py-6">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400 text-2xl mx-auto mb-3">✓</div>
+          <h3 class="font-bold text-white text-base">Order Sent to Kitchen!</h3>
+          <p class="text-xs text-zinc-400 mt-1">Table #{{ orderForm.tableNumber }} • {{ orderForm.quantity }}x {{ getItemMainTitle(orderItem) }}</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -646,6 +841,76 @@ const activeType = ref('all')
 const searchQuery = ref('')
 const selectedItem = ref(null)
 const openCommentsModal = ref(false)
+const openOrderModal = ref(false)
+const orderItem = ref<any>(null)
+const orderForm = ref({
+  tableNumber: 1,
+  quantity: 1,
+  notes: ''
+})
+const orderSuccess = ref(false)
+const orderSubmitting = ref(false)
+const orderError = ref('')
+
+function triggerOrder(item: any) {
+  orderItem.value = item
+  orderForm.value = {
+    tableNumber: 1,
+    quantity: 1,
+    notes: ''
+  }
+  orderSuccess.value = false
+  orderError.value = ''
+  openOrderModal.value = true
+}
+
+async function submitOrder() {
+  if (!orderItem.value || orderSubmitting.value) return
+
+  const targetId = currentRestaurant.value?.id || currentSlug.value
+  if (!targetId || targetId === 'default') {
+    orderError.value = 'Restaurant not loaded. Please refresh and try again.'
+    return
+  }
+
+  const payload = {
+    table_number: Number(orderForm.value.tableNumber) || 1,
+    time_left_mins: 15,
+    is_delayed: false,
+    status: 'New',
+    items: [
+      {
+        name: orderItem.value.name || getItemMainTitle(orderItem.value),
+        quantity: Number(orderForm.value.quantity) || 1,
+        notes: (orderForm.value.notes || '').trim(),
+        is_unavailable: false
+      }
+    ]
+  }
+
+  const config = useRuntimeConfig()
+  orderSubmitting.value = true
+  orderError.value = ''
+  try {
+    await $fetch(`/public/restaurants/${targetId}/orders`, {
+      method: 'POST',
+      baseURL: config.public.apiBase,
+      body: payload
+    })
+
+    orderSuccess.value = true
+    setTimeout(() => {
+      orderSuccess.value = false
+      openOrderModal.value = false
+    }, 2000)
+  } catch (e: any) {
+    console.error('Error saving order to backend:', e)
+    orderError.value = e?.data?.error || e?.message || 'Failed to send order. Please try again.'
+  } finally {
+    orderSubmitting.value = false
+  }
+}
+
 const currentSlide = ref(0)
 const currentSlug = ref('girum')
 const menuListSection = ref(null)
@@ -654,7 +919,7 @@ const newCommentAuthor = ref('')
 const newCommentRating = ref(5)
 const newCommentText = ref('')
 
-let slideInterval = null
+let slideInterval: Number | null = null
 
 const i18n = {
   en: {
@@ -1336,40 +1601,106 @@ function onImgError(event, fallback) {
   event.target.src = fallback
 }
 
-async function updateRestaurantSlug() {
-  let queryParam = 'girum'
-  if (process.client) {
-    const urlParams = new URLSearchParams(window.location.search)
-    queryParam = urlParams.get('id') || urlParams.get('restaurant') || urlParams.get('r') || ''
-  }
-  
+const route = useRoute()
+
+const restaurantDirectory = ref<any[]>([])
+const directoryLoading = ref(false)
+const directoryError = ref('')
+const menuLoadError = ref('')
+
+const selectedRestaurantKey = computed(() =>
+  String(route.params.id || route.query.id || route.query.restaurant || route.query.r || '').trim()
+)
+
+const showingDirectory = computed(() => !selectedRestaurantKey.value)
+const menuLoading = ref(!!selectedRestaurantKey.value)
+
+function restaurantRouteId(r: any) {
+  return r?.custom_sub_link || r?.id || r?.ID || ''
+}
+
+function restaurantDisplayName(r: any) {
+  return r?.name_en || r?.NameEn || r?.name || 'Restaurant'
+}
+
+function restaurantDisplayNameAm(r: any) {
+  return r?.name_am || r?.NameAm || ''
+}
+
+async function loadRestaurantDirectory() {
+  directoryLoading.value = true
+  directoryError.value = ''
   const config = useRuntimeConfig()
+  try {
+    const list: any = await $fetch('/public/restaurants', { baseURL: config.public.apiBase })
+    restaurantDirectory.value = Array.isArray(list) ? list : []
+  } catch (e) {
+    console.error('Failed to load restaurant list:', e)
+    directoryError.value = 'Could not load restaurants. Please try again.'
+    restaurantDirectory.value = []
+  } finally {
+    directoryLoading.value = false
+  }
+}
+
+const filteredDirectory = computed(() => {
+  const q = searchQuery.value.trim().toLowerCase()
+  if (!q) return restaurantDirectory.value
+  return restaurantDirectory.value.filter((r: any) => {
+    const name = restaurantDisplayName(r).toLowerCase()
+    const nameAm = restaurantDisplayNameAm(r).toLowerCase()
+    const location = String(r.location || '').toLowerCase()
+    const slug = String(r.custom_sub_link || '').toLowerCase()
+    return name.includes(q) || nameAm.includes(q) || location.includes(q) || slug.includes(q)
+  })
+})
+
+async function updateRestaurantSlug() {
+  const queryParam = selectedRestaurantKey.value
+  const config = useRuntimeConfig()
+
+  // No restaurant selected — show the public directory instead of picking the first one
+  if (!queryParam) {
+    restaurants.value = {}
+    menuLoadError.value = ''
+    await loadRestaurantDirectory()
+    return
+  }
+
+  menuLoading.value = true
+  menuLoadError.value = ''
   let restData: any = null
 
-  // 1. Try fetching requested restaurant by id/slug
-  if (queryParam) {
-    try {
-      restData = await $fetch(`/public/restaurants/${queryParam}`, { baseURL: config.public.apiBase })
-    } catch(e) {
-      console.warn(`Could not find restaurant '${queryParam}', fetching first available restaurant...`)
-    }
+  try {
+    restData = await $fetch(`/public/restaurants/${queryParam}`, { baseURL: config.public.apiBase })
+  } catch (e) {
+    console.warn(`Could not find restaurant '${queryParam}' directly, checking full list...`)
   }
 
-  // 2. If no queryParam or not found, fetch list of restaurants and take the first one
+  // Resolve by id / custom_sub_link from the list if direct fetch failed — never auto-pick another restaurant
   if (!restData) {
     try {
       const list: any = await $fetch('/public/restaurants', { baseURL: config.public.apiBase })
-      if (list && list.length > 0) {
-        const firstTarget = list[0].custom_sub_link || list[0].id || list[0].ID
-        restData = await $fetch(`/public/restaurants/${firstTarget}`, { baseURL: config.public.apiBase })
+      if (list && Array.isArray(list) && list.length > 0) {
+        const match = list.find((r: any) =>
+          (r.id && String(r.id) === queryParam) ||
+          (r.ID && String(r.ID) === queryParam) ||
+          (r.custom_sub_link && r.custom_sub_link === queryParam)
+        )
+        if (match) {
+          const targetId = match.id || match.ID || match.custom_sub_link
+          restData = await $fetch(`/public/restaurants/${targetId}`, { baseURL: config.public.apiBase })
+        }
       }
-    } catch(e) {
+    } catch (e) {
       console.error('Failed to load restaurants from API backend:', e)
     }
   }
 
   if (!restData) {
     restaurants.value = {}
+    menuLoadError.value = 'Restaurant not found.'
+    menuLoading.value = false
     return
   }
 
@@ -1434,13 +1765,112 @@ async function updateRestaurantSlug() {
     }
   }
 
+  if (newRest.menuItems.length === 0) {
+    const defaultCategories = [
+      { id: 'Meat', name: 'Meat & Grills', amharicName: 'ሥጋ እና ጥብስ', iconName: 'fire' },
+      { id: 'Burger', name: 'Gourmet Burgers', amharicName: 'በርገር', iconName: 'hamburger' },
+      { id: 'Health', name: 'Healthy & Vegan', amharicName: 'ጤናማ / የፆም', iconName: 'leaf' },
+      { id: 'Beverage', name: 'Beverages & Drinks', amharicName: 'መጠጦች', iconName: 'glass' }
+    ]
+    categories.push(...defaultCategories)
+    
+    newRest.menuItems = [
+      {
+        id: 'default-f1',
+        name: 'Sizzling Beef Tibs',
+        amharicName: 'የጋለ የጥብስ ሥጋ',
+        category: 'food',
+        subCategory: 'Meat',
+        amharicSubCategory: 'ሥጋ',
+        price: 680,
+        rating: 4.9,
+        reviews: 142,
+        prepTime: '15-20 min',
+        tag: "Chef's Choice",
+        amharicTag: 'የሼፉ መራጭ',
+        description: 'Tender cubed prime beef sauteed with rosemary, red onions, garlic, and fresh green peppers on a piping hot clay skillet. Served with authentic injera.',
+        ingredients: ['Prime Beef Cutlets', 'Rosemary', 'Red Onions', 'Garlic Butter', 'Fresh Jalapeños', 'Awaze Chili Paste'],
+        pairing: 'Best enjoyed with cold draft beer or tej.',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600',
+        spicy: true,
+        calories: '420 kcal'
+      },
+      {
+        id: 'default-f2',
+        name: 'Royal Beyaynetu Platter',
+        amharicName: 'ሮያል የፆም በያይነቱ',
+        category: 'food',
+        subCategory: 'Health',
+        amharicSubCategory: 'ጤናማ / የፆም',
+        price: 490,
+        rating: 4.8,
+        reviews: 98,
+        prepTime: '10-15 min',
+        tag: 'Popular',
+        amharicTag: 'ተወዳጅ',
+        description: 'A colorful assortment of traditional vegan stews including Kik Alicha, Misir Wot, Gomen, beetroot salad, and chickpea Shiro served over fresh sourdough injera.',
+        ingredients: ['Yellow Split Peas', 'Red Lentils', 'Collard Greens', 'Roasted Chickpea Shiro', 'Beetroot Salad', 'Sourdough Injera'],
+        pairing: 'Complements wonderfully with fresh fruit juices.',
+        image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600',
+        spicy: false,
+        calories: '310 kcal'
+      },
+      {
+        id: 'default-f3',
+        name: 'Awaze Sheger Burger',
+        amharicName: 'አዋዜ ሸገር በርገር',
+        category: 'food',
+        subCategory: 'Burger',
+        amharicSubCategory: 'በርገር',
+        price: 520,
+        rating: 4.7,
+        reviews: 85,
+        prepTime: '15 min',
+        tag: 'Classic',
+        amharicTag: 'ክላሲክ',
+        description: 'Premium grilled beef patty with sharp cheddar cheese, caramelized onions, signature burger aioli, and crisp lettuce on a toasted sesame brioche bun.',
+        ingredients: ['Angus Beef Patty', 'Sharp Cheddar', 'Caramelized Onions', 'Brioche Bun', 'Garlic Aioli'],
+        pairing: 'Try with iced lemon tea or cold lager.',
+        image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=999&auto=format&fit=crop',
+        spicy: false,
+        calories: '620 kcal'
+      },
+      {
+        id: 'default-d1',
+        name: 'Habesha Cold Lager',
+        amharicName: 'ሐበሻ የቀዘቀዘ ቢራ',
+        category: 'drinks',
+        subCategory: 'Beverage',
+        amharicSubCategory: 'መጠጦች',
+        price: 120,
+        rating: 4.7,
+        reviews: 189,
+        prepTime: '2 min',
+        tag: 'Chilled',
+        amharicTag: 'የቀዘቀዘ',
+        description: 'Premium local beer crafted from pure spring waters, featuring a deep rich malt aroma and exceptionally crisp golden bubbles.',
+        ingredients: ['Barley Malt', 'Hops', 'Pure Mountain Water'],
+        pairing: 'The classic pairing for Sizzling Tibs and burgers.',
+        image: 'https://images.unsplash.com/photo-1500217052183-bc01eee1a74e?q=80&w=688&auto=format&fit=crop',
+        spicy: false,
+        calories: '140 kcal'
+      }
+    ]
+  }
+
   restaurants.value = { [restId]: newRest }
+  menuLoading.value = false
 }
 
 watch(searchQuery, (val) => {
   if (val && val.trim().length > 0) {
     scrollToMenu()
   }
+})
+
+watch(() => [route.params.id, route.query.id, route.query.restaurant, route.query.r], () => {
+  searchQuery.value = ''
+  updateRestaurantSlug()
 })
 
 onMounted(() => {
