@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import SampleMenu from '~/pages/sample-menu.vue';
-
 </script>
 
 <template><!-- Hero Section -->
@@ -23,9 +21,11 @@ import SampleMenu from '~/pages/sample-menu.vue';
         </p>
         <!-- Action Button below Hero Mockup -->
         <div class="pt-2">
+          <a href="/sampleMenu">
           <NuxtLink :to="SampleMenu" class="hover:bg-black inline-block bg-brand-400 text-black hover:text-brand-400 border border-brand-500/30 font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl">
             Explore Sample Menu
           </NuxtLink>
+          </a>
         </div>
 
 
@@ -77,6 +77,7 @@ import SampleMenu from '~/pages/sample-menu.vue';
         </div>
 
         <!-- The Smartphone Container (Redirects to menu.html on click) -->
+        <a href="/sampleMenu">
         <NuxtLink :to="SampleMenu">
         <div 
           class="phone-body cursor-pointer relative w-[280px] sm:w-[310px] h-[570px] bg-zinc-950 rounded-[48px] p-3 border-[4px] border-zinc-700/80 group overflow-hidden select-none"
@@ -165,7 +166,7 @@ import SampleMenu from '~/pages/sample-menu.vue';
 
           </div>
         </div>
-      </NuxtLink>
+      </NuxtLink></a>
       </div>
     </div>
   </section>

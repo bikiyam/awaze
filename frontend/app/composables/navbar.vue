@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import SampleMenu from '~/pages/sample-menu.vue';
-
 </script>
 
 <template>
 <header class="sticky top-0 z-50 backdrop-blur-md  px-6 lg:px-12 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      
       <!-- Brand Logo -->
       <a href="#" class="flex items-center space-x-3 group">
         <div class="w-10 h-10 p-[2px] group-hover:scale-105 transition-transform">
@@ -19,11 +16,9 @@ import SampleMenu from '~/pages/sample-menu.vue';
 
       <!-- Primary Action CTA -->
       <NuxtLink :to="SampleMenu">
-      <div class="flex items-center space-x-4">
-          <h1 class="shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">Look at sample</h1>
-      </div>
-      </NuxtLink>
-
+      <a href="../pages/sampleMenu">
+                <h1 class="flex items-center space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">Look at sample</h1>
+      </a></NuxtLink>
     </div>
   </header>
 </template>

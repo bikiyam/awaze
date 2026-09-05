@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import SampleMenu from '~/pages/sample-menu.vue';
+import SampleMenu from '~/pages/sampleMenu.vue';
+
 
 </script>
 
@@ -42,6 +43,7 @@ import SampleMenu from '~/pages/sample-menu.vue';
 
         <!-- The Smartphone Container (Redirects to menu.html on click) -->
         <div class="items-center">
+        <a href="/sampleMenu">
         <NuxtLink :to="SampleMenu">
         <div 
           class="phone-body cursor-pointer relative w-[280px] h-[570px] bg-black rounded-[48px] p-3 border-[2px] border-zinc-700/80 group overflow-hidden select-none mx-auto"
@@ -126,12 +128,12 @@ import SampleMenu from '~/pages/sample-menu.vue';
 
           </div>
         </div>
-      </NuxtLink></div>
+      </NuxtLink></a></div>
       <!-- Action Button below Hero Mockup -->
         <div class="pt-2 mt-12">
-          <NuxtLink :to="SampleMenu" class="hover:bg-black inline-block bg-brand-400 text-black hover:text-brand-400 border border-brand-500/30 font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl">
+          <a href="/sampleMenu"><NuxtLink :to="SampleMenu" class="hover:bg-black inline-block bg-brand-400 text-black hover:text-brand-400 border border-brand-500/30 font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl">
             Explore Sample Menu
-          </NuxtLink>
+          </NuxtLink></a>
         </div> 
       <section class="text-2xl font-black text-brand-400 tracking-tight mt-20 mb-4 px-3 max-w-xl mx-auto">
           <div class="grid grid-cols-4 gap-1">
