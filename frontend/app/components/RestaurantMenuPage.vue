@@ -302,7 +302,7 @@
                 >
                   <span>🛒 Order</span>
                 </button>
-                <button 
+                <!----<button 
                   type="button" 
                   @click.stop="selectItem(item)"
                   class="bg-emerald-950/60 hover:bg-emerald-800/80 text-emerald-400 hover:text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-900/60 flex items-center space-x-1 transition-colors cursor-pointer"
@@ -311,7 +311,7 @@
                   <svg class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
-                </button>
+                </button>--->
               </div>
             </div>
           </div>
@@ -377,7 +377,7 @@
           </div>
         </div>
 
-        <div class="w-full lg:w-1/2 flex flex-col h-full overflow-y-auto p-5 sm:p-6 md:p-8 scrollbar-thin">
+        <div class="w-full lg:w-1/2 flex flex-col h-full overflow-y-auto mt-12 mb-24 p-5 sm:p-6 md:p-8 scrollbar-thin">
           <div class="mb-4">
             <span class="text-emerald-400 text-xs font-black uppercase tracking-widest">{{ getItemSubCategory(selectedItem) }}</span>
             <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight mt-1 leading-tight">{{ getItemMainTitle(selectedItem) }}</h2>
@@ -492,13 +492,14 @@
             </div>
           </div>
 
-          <div class="mt-auto pt-4 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div class="text-xs text-zinc-400 text-center sm:text-left">{{ t('waiterNote') }}</div>
+          <div>
+          
+          <div class=" mt-auto mb-20 pt-4 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-3">
 
             <div class="flex items-center gap-2 w-full sm:w-auto">
               <button 
                 @click="triggerOrder(selectedItem)"
-                class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-950/40 shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
+                class=" sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-950/40 shrink-0 cursor-pointer flex items-center justify-center"
               >
                 <span>🛒 Order Dish</span>
               </button>
@@ -509,6 +510,7 @@
                 {{ t('closeCard') }}
               </button>
             </div>
+          </div>
           </div>
 
         </div>
