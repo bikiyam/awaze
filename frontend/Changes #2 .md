@@ -22,7 +22,7 @@ Please Read Everything Carefully.
 
 
 # Dashboards
-- We need a *login.vue* file that the dashboard will lead both of them to if they're not logged in. 
+- We need a *auth.vue* file that the dashboard will lead both of them to if they're not logged in. 
 - We need a *dashboard.vue* system that both can access, but depending on their subscribed plan, we want the dashboard to show and not show the features i am going to list you below. **(The current one we worked on as "Dashboard.vue" needs to be changed to "SuperAdmin.vue")**
 - Let's work on a new page called *dashboard.vue* that will replace both basic.vue and premium.vue pages. Only needs adjustment of already made pages.
 
@@ -166,7 +166,7 @@ About Order:
 
 
 # Misunderstanding on previous work
-- Login is not needed only if the SuperAdmin is trying to access from the SuperAdmin Dashboard. If the one trying to access didn't come from the superadmin page, it always needs to login.
+- Login is *not* needed only if the SuperAdmin is trying to access from the SuperAdmin Dashboard. If the one trying to access didn't come from the superadmin page restaurants section, it always needs to login.
 
 
 
@@ -181,9 +181,14 @@ About Order:
 ## Next Instructions (Adjustments)
 
 Organizing the code:
-- Adjust the *login.vue* file and make the dashboard lead to it if the one trying to access is not logged in. (Cut the code from the basic or premium page (whichever you think is best) and put it there.) It also needs to ask what the plan is. (Inputs needed: *username*, *plan* (choice from basic / premium), *password*). If the information is correct, Lead to the dashboard which shows for their plan.
-- Make the dashboard page (basic/ Premium we will be working on now) accessed only for the restaurant logged in, with their specific information.
-- 
+- Adjust the *auth.vue* file. I have already created the file in 'pages/admin'. Make the dashboard lead to it if the one trying to access is not logged in. (Cut the code from the basic or premium page (whichever you think is best) and put it there.) It also needs to ask what the plan is. (Inputs needed: *username*, *plan* (choice from basic / premium), *password*). If the information is correct, Lead to the dashboard which shows for their plan.
+- Adjust the *dashboard.vue* file (basic/ Premium we will be working on now) accessed only for the restaurant logged in, with their specific information.
+- **We don't want the SuperAdmin page edited!**
+
+Actual backend:
+- Make the dashboard.vue file show the features depending on the plan the user logged in.
+- Connect the login info to the dashboard page we made.
+- Make the dashboard actually pull the right information for the selected restaurant from the database.
 
 
 
