@@ -19,7 +19,10 @@ Please Read Everything Carefully.
 - Main concept is creating a central platform that restaurants can contain their digital menus, while tracking their analytics that come from it for marketing purposes. Now I'm going to specificallyy tell you what we want the platform to have as the background process. 
 
 - There are 2 packages that the platform will be offering for the restaurants. Currently being the basic plan and premium plan. 
+-- Basic Plan: One time payment for Digitalizing Menus, Not really the special treatment the platform gives.
+-- Premium Plan: Subscription based plan where all the features are eligible to use (Like Data Analytics, More QR Stands, Ordering(Cafe/Rooms), Games for Customers)
 
+# =============================================================
 
 # Dashboards
 - We need a *auth.vue* file that the dashboard will lead both of them to if they're not logged in. 
@@ -50,13 +53,7 @@ Additional Pages:
   - Peak working times: in what time range the views are mostly high.
 - *Sub-Page #6 (Subscription)*: A Sub-page that they can see what plan they are on (Current Plan), Subscription Price, Payment status, next payment, Payment history, Upgrade / Downgrade options.
 
-
-
-
-
-
-
-
+# =============================================================
 
 # Super Admin Dashboard
 - We need an ultimate platform dashboard that have access to anything going on in the platform database.
@@ -72,13 +69,7 @@ Sub-pages:
 
 - **We have already done most of this. I'll put further informations when needed, just to not kill time for now. This just needs a little more adjustment.**
 
-
-
-
-
-
-
-
+# =============================================================
 
 # Menu Page
 - We don't want a person who got into the website through a specific restaurant / specific branch of a restaurant to have access to any other restaurant or any other branch. We will be avoiding a "Back" button which will take them to all the list of them. You did the right thing showing them on the '/menu' page tho. we just don't want the back button inside 'menu/specific_restaurant'.
@@ -88,13 +79,7 @@ About Order:
 - We don't want the order button on
 - We need an orders button on the menu page. where people can see the list that's ordered on their table. 
 
-
-
-
-
-
-
-
+# =============================================================
 
 # Kitchen Admin Page
 - Page only accessible if the ordering toggle is 'on' in the premium user's settings, where the workers in the kitchen can see who ordered, what and how much they ordered, when they ordered it, from where (table/room) they ordered it and their phone number. 
@@ -103,26 +88,13 @@ About Order:
 
 - Need a login system that the kitchen workers of that specific restaurant only get in with, and lists all the orders coming from that specific menu page.
 
-
-
-
-
-
-
-
+# =============================================================
 
 # Game Page
 - A Page dedicated to showing a list of games which will be available to be played for individuals and groups. This page will be recommended on premium restaurant's pages as a button and also on a page that a person who ordered a food watches it saying "Play a game until the food is delivered to you."
 - The list of the games will be decided real soon and we'll try to clone already made up games from github and integrate them with this platform.
 
-
-
-
-
-
-
-
-
+# =============================================================
 
 # Features to keep mind on
 
@@ -138,13 +110,7 @@ About Order:
 - *Restaurant Branches*: This is a new idea added! So when there are premium users that have multiple branches and want to integrate it in this platform, they cam turn on the toggle and have a branches feature. What this does is rather than creating the foods as 1 restaurant and containing them in there, It gives you a choice to either create a food list for each branch or do one list of foods and all the branches will take that list as theirs. Rather than just creating a list of foods/drinks, you first create a list of branches and the branches are the one's that contain the foods.
 - This will also affect the analytics page of the premium users showing both analytics as a branch and also generally.
 
-
-
-
-
-
-
-
+# =============================================================
 
 # Notes to take and Add
 
@@ -153,21 +119,12 @@ About Order:
 
 - Only the SuperAdmin can access Any and Every QR Code created through this platform. No access for a QR Code is given to the restaurant owner.
 
-
-
-
-
-
-
-
-
-
-
-
+# =============================================================
 
 # Misunderstanding on previous work
 - Login is *not* needed only if the SuperAdmin is trying to access from the SuperAdmin Dashboard. If the one trying to access didn't come from the superadmin page restaurants section, it always needs to login.
 
+# =============================================================
 
 
 
@@ -176,26 +133,46 @@ About Order:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# =============================================================
 
 
 ## Next Instructions (Adjustments)
 
 Organizing the code:
 - Adjust the *auth.vue* file. I have already created the file in 'pages/admin'. Make the dashboard lead to it if the one trying to access is not logged in. (Cut the code from the basic or premium page (whichever you think is best) and put it there.) It also needs to ask what the plan is. (Inputs needed: *username*, *plan* (choice from basic / premium), *password*). If the information is correct, Lead to the dashboard which shows for their plan.
-- Adjust the *dashboard.vue* file (basic/ Premium we will be working on now) accessed only for the restaurant logged in, with their specific information.
+- Adjust the *dashboard.vue* file (basic/ Premium we will be working on now) to be accessed only for the restaurant who logged in.
+- Connect the informations and buttons on the dashboard with the actual database information
+- Remove the informations i told you above (On the basic / premium dashboard explanation above) from the dashboard if the account.plan is 'Basic'.
 - **We don't want the SuperAdmin page edited!**
 
 Actual backend:
 - Make the dashboard.vue file show the features depending on the plan the user logged in.
 - Connect the login info to the dashboard page we made.
 - Make the dashboard actually pull the right information for the selected restaurant from the database.
+- Ordering Page, I want you to connect it with the backend systemm of the restaurants,
 
 
 
 
 
 # Notes to take 
-
-- 
 
 - Please Finish it Asap.
