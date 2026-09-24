@@ -22,12 +22,13 @@ Please Read Everything Carefully.
 -- Basic Plan: One time payment for Digitalizing Menus, Not really the special treatment the platform gives.
 -- Premium Plan: Subscription based plan where all the features are eligible to use (Like Data Analytics, More QR Stands, Ordering(Cafe/Rooms), Games for Customers)
 
+
 # =============================================================
 
 # Dashboards
 - We need a *auth.vue* file that the dashboard will lead both of them to if they're not logged in. 
 - We need a *dashboard.vue* system that both can access, but depending on their subscribed plan, we want the dashboard to show and not show the features i am going to list you below. **(The current one we worked on as "Dashboard.vue" needs to be changed to "SuperAdmin.vue")**
-- Let's work on a new page called *dashboard.vue* that will replace both basic.vue and premium.vue pages. Only needs adjustment of already made pages.
+- Let's work on a new page called *dashboard.vue* that will replace both basic.vue and premium.vue pages. Only needs adjustment of already made pages. Shows 
 
 
 # Basic Plan users can access (Only these!)
@@ -102,7 +103,7 @@ About Order:
 
 - *Ordering*: a feature accessible for premium users only if they made the toggle on. It creates multiple tables with their own QR Codes and also makes them access the kitchen page. **Need to take phone number when asking inputs from ordering person for eligibilty and trust purposes.**
 - We need the amount of tables to be shown in the analytics page. but the restaurant can't see the qr codes for the tables. Only the SuperAdmin can access any QR Code created through this platform.
-- We don't want the whole information created to be deleted instantly if the toggle is turned off, so we want 2 things. 1. Ask twice if they're actually trying to delete the information created. 2. Just hide the information for some time if they want it back.
+- We don't want the whole information created to be deleted instantly if the toggle is turned off, so we want 2 things. 1. Ask twice if they're actually trying to delete the information created. 2. Just hide the information for some time if they want it back.o
 
 - *Room Integration*: also a feature accessible for premium users only if they made the toggle on, creates multiple rooms and their qr codes. 
 - We also need the amount of rooms to be shown in the analytics page. but the restaurant can't see the qr codes for the rooms.
@@ -159,7 +160,10 @@ About Order:
 Organizing the code:
 - Adjust the *auth.vue* file. I have already created the file in 'pages/admin'. Make the dashboard lead to it if the one trying to access is not logged in. (Cut the code from the basic or premium page (whichever you think is best) and put it there.) It also needs to ask what the plan is. (Inputs needed: *username*, *plan* (choice from basic / premium), *password*). If the information is correct, Lead to the dashboard which shows for their plan.
 - Adjust the *dashboard.vue* file (basic/ Premium we will be working on now) to be accessed only for the restaurant who logged in.
-- Connect the informations and buttons on the dashboard with the actual database information
+  - Connect the informations and buttons on the dashboard with the actual database information. 
+  - Items Sub-Page: Connect it with the actual awaze database.
+    - On the food view mode in items, add an Edit Food Button.
+  - Notifications Sub-Page: Make it actually 
 - Remove the informations i told you above (On the basic / premium dashboard explanation above) from the dashboard if the account.plan is 'Basic'.
 - **We don't want the SuperAdmin page edited!**
 
@@ -168,7 +172,7 @@ Actual backend:
 - Connect the login info to the dashboard page we made.
 - Make the dashboard actually pull the right information for the selected restaurant from the database.
 - Ordering Page, I want you to connect it with the backend systemm of the restaurants,
-
+- Make the menu page to not be shown if the restaurant is suspended.
 
 
 

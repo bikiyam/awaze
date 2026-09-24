@@ -41,10 +41,12 @@ const menuLink = '/menu'
   <section class="py-24 px-6 max-w-6xl mx-auto border-t border-brand-900/20">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
       <div class="space-y-2">
-        <span class=" block bg-clip-text text-transparent bg-linear-to-r from-brand-400 via-emerald-200 to-amber-400 uppercase tracking-widest font-semibold max-w-md">************  ************  ************  ************</span>
+        <div class=" block bg-clip-text text-transparent bg-linear-to-r from-brand-400 via-emerald-200 to-amber-400 uppercase tracking-widest font-semibold max-w-md">************  ************  ************  ************</div>
         <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">What We Deliver <br><span class="block sm:inline text-xl sm:text-3xl font-bold normal-case text-brand-300">የምንሰጣቸው አገልግሎቶች</span></h2>
       </div>
     </div>
+
+
 
     <!-- Line-Segmented Feature List instead of heavy cards -->
     <div class="divide-y divide-brand-900/40 border-y border-brand-900/40 text-xl sm:text-2xl font-black uppercase text-white group-hover:text-brand-400 transition-colors">
@@ -206,16 +208,18 @@ const menuLink = '/menu'
 
 
   <!-- Pricing Section -->
-  <section class="py-24 px-6 max-w-6xl mx-auto border-t border-brand-900/20">
+  <section class="py-24 px-6 max-w-5/6 mx-auto border-t border-brand-900/20">
     <div class="text-center space-y-3 mb-16">
       <span class="text-brand-400 text-[10px] font-black uppercase tracking-widest">Investment <span class="normal-case font-normal text-zinc-400">/ የዋጋ እቅድ</span></span>
-      <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">Packages & Pricing <br><span class="block sm:inline text-xl sm:text-3xl font-bold normal-case text-brand-300">የዋጋ ዝርዝሮች</span></h2>
+      <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">Packages & Pricing<br><span class="block sm:inline text-xl sm:text-3xl font-bold normal-case text-brand-300">የዋጋ ዝርዝሮች</span></h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+
+
       
       <!-- Basic Plan -->
-      <div class="bg-linear-to-b from-brand-950/80 to-obsidian-900 border-2 border-brand-500 p-8 rounded-[36px] flex flex-col justify-between shadow-2xl relative">
+      <div class="bg-obsidian-900/20 border-2 md:w-5/6 md:ml-auto border-zinc-800 p-8 rounded-[36px] flex flex-col justify-between shadow-2xl relative">
 
         <div>
           <h3 class="text-2xl font-black text-white uppercase">Basic Plan <span class="text-lg font-bold normal-case text-brand-300 block">መሰረታዊ እቅድ</span></h3>
@@ -223,7 +227,64 @@ const menuLink = '/menu'
             <span class="text-4xl sm:text-5xl font-black text-brand-400">14,999</span>
             <span class="text-xs font-black text-zinc-400 ml-2 uppercase">ETB / ብር</span>
           </div>
-          <p class="text-[9px] text-zinc-400 uppercase font-bold tracking-wider mt-3">One-Time Complete Setup <span class="normal-case font-normal text-zinc-300">/ የአንድ ጊዜ ሙሉ ዝግጅት</span></p>
+          <span class="text-[12px] font-extrabold uppercase border border-zinc-800 text-zinc-500 px-2.5 py-1 mt-2.5 rounded-md inline-block">One-Time Full Setup <span>/ የአንድ ጊዜ ሙሉ ክፍያ</span></span>
+          <div>
+          <div class="mt-8 text-xs font-semibold tracking-wider flex flex-col gap-2">
+            <div class="flex space-x-3">
+              <span class="text-brand-400">✦</span>
+              <span class="text-xs md:text-sm text-zinc-200">
+                <strong class=" uppercase text-white font-semibold">High Quality Digital Menu</strong> on Awaze Platform 
+                </span>
+            </div>
+
+            <div class="flex space-x-3">
+              <span class="text-brand-400">✦</span>
+              <span class="text-xs md:text-sm text-zinc-200">
+                <strong class=" uppercase text-white font-semibold">10 QR Code Stands</strong>
+                </span>
+            </div>
+
+            <div class="flex space-x-3">
+              <span class="text-brand-400">✦</span>
+              <span class="text-xs md:text-sm text-zinc-200">
+                <strong class=" uppercase text-white font-semibold">Access Page:</strong> Full customization of Menu Items, Descriptions, Food Images, Stock Availability, and Prices with Preview & Publish features.
+                </span>
+            </div>
+
+            <div class="flex space-x-3">
+              <span class="text-brand-400">✦</span>
+              <span class="text-xs md:text-sm text-zinc-200">
+                <strong class="uppercase text-white font-semibold">Dashboard Page:</strong> Overview of total menu items, categories (Breakfast, Drinks, Desserts), Menu status (Published/Draft), Last updated date, and QR code download button.
+                </span>
+            </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <button 
+          @click="contactModalOpen = true; contactForm.plan = 'Basic Plan (17,999 ETB / መሰረታዊ እቅድ)'" 
+          class="w-full bg-brand-500 hover:bg-brand-400 text-black font-black uppercase py-4 rounded-xl text-xs tracking-widest mt-10 shadow-xl transition-all"
+        >
+          <div>Get Started</div>
+        </button>
+
+      </div>
+
+
+      
+      <!-- Premium Plan -->
+      <div class="bg-linear-to-b from-brand-950/80 to-obsidian-900 border-2 border-brand-500 p-8 rounded-[36px] flex flex-col justify-between shadow-2xl relative">
+        <div class="absolute -top-3.5 right-8 bg-brand-500 text-black px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
+            Recommended / ተመራጭ
+        </div>
+        <div>
+          <h3 class="text-2xl font-black text-white uppercase">Premium Plan <span class="text-lg font-bold normal-case text-brand-300 block">ፕሪሚየም እቅድ</span></h3>
+          <div class="mt-4 flex items-baseline">
+            <span class="text-4xl sm:text-5xl font-black text-white">17,999</span>
+            <span class="text-xs font-black text-zinc-400 ml-2 uppercase">ETB / ብር</span>
+          </div>
+          <span class="text-[12px] font-extrabold uppercase border border-brand-500 text-brand-500 px-2.5 py-1 mt-2.5 rounded-md inline-block">Subscription Based <span>/ በወርሃዊ ክፍያ</span></span>
           <div>
           <div class="mt-8  text-xs font-bold tracking-wider">
             <div class="flex items-start space-x-3 text-zinc-500">
@@ -255,30 +316,59 @@ const menuLink = '/menu'
             </div>
             </div>
 
-            <div class="mt-4">
-            <div class="flex items-start space-x-3">
+          </div>
+        </div>
+        
+        <button 
+          @click="contactModalOpen = true; contactForm.plan = 'Basic Plan (17,999 ETB / መሰረታዊ እቅድ)'" 
+          class="w-full bg-brand-500 hover:bg-brand-400 text-black font-black uppercase py-4 rounded-xl text-xs tracking-widest mt-10 shadow-xl transition-all"
+        >
+          <div>Get Started</div>
+        </button>
+
+      </div>
+
+
+
+
+      <!-- Enterprise Plan -->
+      <div class="bg-obsidian-900/20 border-2 border-zinc-800 p-8 rounded-[36px] flex flex-col justify-between shadow-2xl relative md:w-5/6">
+
+        <div>
+          <h3 class="text-2xl font-black text-white uppercase">Enterprise Plan <span class="text-lg font-bold normal-case text-brand-300 block">ኤንተርፕራይዝ እቅድ</span></h3>
+          <div class="mt-4 flex items-baseline">
+            <span class="text-4xl sm:text-5xl font-black text-brand-400">24,999</span>
+            <span class="text-xs font-black text-zinc-400 ml-2 uppercase">ETB / ብር</span>
+          </div>
+          <span class="text-[12px] font-extrabold uppercase border border-zinc-800 text-zinc-500 px-2.5 py-1 mt-2.5 rounded-md inline-block">Subscription Based <span>/ በወርሃዊ ክፍያ</span></span>
+          <div>
+          <div class="mt-8  text-xs font-bold tracking-wider">
+            <div class="flex items-start space-x-3 text-zinc-500">
               <span class="text-brand-400">✦</span>
               <span class="text-xs md:text-sm text-zinc-200">
-              <span class="block font-normal normal-case text-zinc-300 text-[11px]">በአዋዜ ፕላትፎርም ላይ የዲጂታል ምናሌ ገጽ</span>  
-              </span>
+                <strong class=" uppercase text-white">HD Digital Menu</strong> on Awaze Platform 
+                </span>
             </div>
+
             <div class="flex items-start space-x-3">
               <span class="text-brand-400">✦</span>
               <span class="text-xs md:text-sm text-zinc-200">
-              <span class="block font-normal normal-case text-zinc-300 text-[11px]">የዳሽቦርድ ገጽ፡ አጠቃላይ የምግብ ዝርዝር፣ ምድቦች (ቁርስ፣ መጠጦች፣ ጣፋጮች)፣ የምናሌ ሁኔታ (የታተመ/ረቂቅ)፣ የመጨረሻ ማሻሻያ ቀን እና የQR ኮድ ማውረጃ አዝራር።</span>
-              </span>
+                <strong class=" uppercase text-white">10 QR Code Stands</strong>
+                </span>
             </div>
+
             <div class="flex items-start space-x-3">
               <span class="text-brand-400">✦</span>
               <span class="text-xs md:text-sm text-zinc-200">
-              <span class="block font-normal normal-case text-zinc-300 text-[11px]">የምናሌ ዕቃዎችን፣ መግለጫዎችን፣ የምግብ ፎቶዎችን፣ የአክሲዮን ሁኔታን እና ዋጋዎችን ከቅድመ-እይታ እና ማተሚያ ባህሪያት ጋር ሙሉ በሙሉ ማስተካከል ይችላሉ።</span>
-              </span>
+                <strong class=" uppercase text-white">Access Page:</strong> Full customization of Menu Items, Descriptions, Food Images, Stock Availability, and Prices with Preview & Publish features.
+                </span>
             </div>
+
             <div class="flex items-start space-x-3">
               <span class="text-brand-400">✦</span>
               <span class="text-xs md:text-sm text-zinc-200">
-              <span class="block font-normal normal-case text-zinc-300 text-[11px]">የእርስዎን እና የአዋዜ አርማ የያዙ 10 የQR ኮድ ማቅረቢያዎች</span>
-              </span>
+                <strong class="uppercase text-white">Dashboard Page:</strong> Overview of total menu items, categories (Breakfast, Drinks, Desserts), Menu status (Published/Draft), Last updated date, and QR code download button.
+                </span>
             </div>
             </div>
 
@@ -289,75 +379,9 @@ const menuLink = '/menu'
           @click="contactModalOpen = true; contactForm.plan = 'Basic Plan (17,999 ETB / መሰረታዊ እቅድ)'" 
           class="w-full bg-brand-500 hover:bg-brand-400 text-black font-black uppercase py-4 rounded-xl text-xs tracking-widest mt-10 shadow-xl transition-all"
         >
-          <div>Contact us to Get Started</div>
-          <div class="text-[10px] font-bold normal-case mt-0.5">ለመጀመር ያግኙን</div>
+          <div>Get Started</div>
         </button>
 
-      </div>
-
-      <!-- Premium Plan (Upcoming) -->
-      <div class="relative bg-obsidian-900/50 border border-zinc-800 p-8 sm:p-10 rounded-[36px] flex flex-col justify-between opacity-75">
-        <div class="absolute -top-3.5 right-8 bg-brand-500 text-black px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
-            Recommended / ተመራጭ
-          </div>
-        <div>
-          
-          <span class="text-zinc-500 text-[9px] font-black uppercase tracking-widest border border-zinc-800 px-3 py-1 rounded-full">
-            Enterprise <span class="normal-case font-normal text-zinc-500">/ ኤንተርፕራይዝ</span>
-          </span>
-          <h3 class="text-2xl font-black text-white uppercase mt-4 mb-2">Premium Plan <span class="text-lg font-bold normal-case text-zinc-400 block">ፕሪሚየም እቅድ</span></h3>
-          <span class="text-[15px] font-extrabold uppercase bg-amber-950/80 border border-amber-800/40 text-white px-2.5 py-1 rounded-md inline-block mb-3">Subscription Based <span class="normal-case font-normal text-xs text-amber-200">/ በወርሃዊ ክፍያ</span></span>
-          <div class="mt-2 text-xl font-black text-zinc-500 uppercase">Coming Soon <span class="block text-sm font-normal normal-case text-zinc-500">በቅርብ ቀን የሚመጣ</span></div>
-
-          <div class="space-y-3.5 pt-6 border-t border-emerald-950/80 text-zinc-500">
-            
-            <div class="flex items-start space-x-3">
-              <span>✦</span>
-              <span class="text-xs md:text-sm">
-                <strong class="text-zinc-500">Custom QR Codes</strong> with your own brand logo and theme styling.
-                <span class="block font-normal normal-case text-zinc-500 text-[11px]">የእራስዎ የንግድ አርማ እና ገጽታ ያላቸው ብጁ የQR ኮዶች።</span>
-              </span>
-            </div>
-
-            <div class="flex items-start space-x-3">
-              <span><span>✦</span></span>
-              <span class="text-xs md:text-sm">
-                <strong class="text-zinc-500">Done-For-You Updates:</strong> Awaze team handles all updates for you within 24 hours.
-                <span class="block font-normal normal-case text-zinc-500 text-[11px]">ማሻሻያዎችን በአዋዜ ቡድን በ24 ሰዓታት ውስጥ እንሰራለን።</span>
-              </span>
-            </div>
-
-            <div class="flex items-start space-x-3">
-              <span>✦</span>
-              <span class="text-xs md:text-sm">
-                <strong class="text-zinc-500">Insights Page:</strong> Analytics on most viewed dishes, total menu scans, peak scan hours, and popular categories.
-                <span class="block font-normal normal-case text-zinc-500 text-[11px]">የትንተና ገጽ፡ በብዛት የታዩ ምግቦች፣ የQR ኮድ ንባብ ብዛት እና ተወዳጅ ምድቦች።</span>
-              </span>
-            </div>
-
-            <div class="flex items-start space-x-3">
-              <span>✦</span>
-              <span class="text-xs md:text-sm">
-                <strong class="text-zinc-500">Interactive Banners:</strong> Run custom promotion banners on guest screens (e.g., "20% Off Coffee Today", "New Pizza Available").
-                <span class="block font-normal normal-case text-zinc-500 text-[11px]">የማስታወቂያ ባነሮች፡ በደንበኞች ስክሪን ላይ ልዩ ማስታወቂያዎችን ማሳየት።</span>
-              </span>
-            </div>
-
-            <div class="flex items-start space-x-3">
-              <span>✦</span>
-              <span class="text-xs md:text-sm">
-                <strong class="text-zinc-500">Awaze Platform Spotlight:</strong> Featured inclusions in Restaurant of the Week, Weekend Specials, and Holiday Promotions.
-                <span class="block font-normal normal-case text-zinc-500 text-[11px]">የሳምንቱ ምርጥ ሬስቶራንት እና በበዓላት ማስታወቂያዎች ላይ መካተት።</span>
-              </span>
-            </div>
-
-          </div>
-        </div>
-
-        <button disabled class="w-full bg-zinc-800 text-zinc-600 font-black uppercase py-4 rounded-xl text-xs tracking-widest mt-10 cursor-not-allowed">
-          <div>Notify Me</div>
-          <div class="text-[10px] font-bold normal-case">ሲጀመር አሳውቁኝ</div>
-        </button>
       </div>
 
     </div>
@@ -375,95 +399,6 @@ const menuLink = '/menu'
 
 
   <section class="md:flex py-24 px-6 max-w-7xl mx-auto gap-12">
-    <!-- Re-imagined Interactive Profit Growth Simulator -->
-  <section class="">
-    <div class="max-w-4xl mx-auto space-y-12 mb-8">
-      
-      <!-- Section Header -->
-      <div class="text-center space-y-3">
-        <span class="text-brand-400 text-[10px] font-black uppercase tracking-widest">Financial Impact Forecast</span>
-        <h2 class="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white">Profit Growth Simulator</h2>
-        <p class="text-zinc-400 text-xs max-w-md mx-auto font-medium">Adjust parameters below to estimate monthly revenue growth from digital upselling.</p>
-      </div>
-
-      <!-- Simulator Dashboard Container -->
-      <div class="glass-panel p-8 sm:p-12 rounded-[36px] border border-brand-500/20 shadow-2xl relative overflow-hidden">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <!-- Left Column: Controls -->
-          <div class="lg:col-span-7 space-y-8">
-            
-            <!-- Control 1: Dining Tables -->
-            <div class="space-y-4">
-              <div class="flex justify-between items-center text-xs font-black tracking-widest uppercase">
-                <span class="text-zinc-300">Dining Tables <span class="normal-case font-normal text-zinc-400">(የምግብ ጠረጴዛዎች ብዛት)</span></span>
-                <span class="text-brand-400 bg-brand-950 px-3 py-1 rounded-lg border border-brand-900/80" x-text="roiTables + ' Tables'"></span>
-              </div>
-              <input type="range" min="5" max="80" x-model="roiTables" class="w-full accent-brand-500 h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer">
-              <div class="flex justify-between text-[9px] text-zinc-500 font-bold">
-                <span>5 Tables</span>
-                <span>40 Tables</span>
-                <span>80 Tables</span>
-              </div>
-            </div>
-
-            <!-- Control 2: Average Check Size -->
-            <div class="space-y-4">
-              <div class="flex justify-between items-center text-xs font-black tracking-widest uppercase">
-                <span class="text-zinc-300">Average Bill Size <span class="normal-case font-normal text-zinc-400">(አማካይ የሂሳብ መጠን)</span></span>
-                <span class="text-amber-400 bg-amber-950/60 px-3 py-1 rounded-lg border border-amber-900/80" x-text="roiAvgBill + ' ETB'"></span>
-              </div>
-              <input type="range" min="250" max="2500" step="50" x-model="roiAvgBill" class="w-full accent-amber-500 h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer">
-              <div class="flex justify-between text-[9px] text-zinc-500 font-bold">
-                <span>250 ETB</span>
-                <span>1,250 ETB</span>
-                <span>2,500 ETB</span>
-              </div>
-            </div>
-
-            <div class="pt-2 text-[10px] text-zinc-400 uppercase font-semibold leading-relaxed">
-              ✦ Model assumes standard 2.5 average table turns per day & 22% average ticket lift from high-res appetite creation. <span class="block normal-case font-normal text-zinc-300 text-[10px] mt-1">* ሞዴሉ በቀን 2.5 ጊዜ ጠረጴዛዎች እንደሚቀየሩ እና ባለከፍተኛ ጥራት ፎቶዎች የ22% የሽያጭ ጭማሪ እንደሚያመጡ ያስረክባል።</span>
-            </div>
-
-          </div>
-
-          <!-- Right Column: Visual Forecast Display HUD -->
-          <div class="lg:col-span-5 bg-obsidian-950/90 rounded-3xl p-8 border border-brand-900/60 text-center space-y-6 flex flex-col justify-between shadow-inner">
-            
-            <div>
-              <span class="text-[9px] font-black uppercase tracking-widest text-zinc-400 block mb-2">Projected Monthly Revenue Lift <span class="block normal-case font-normal text-[10px] text-brand-300">የተገመተ ወርሃዊ የገቢ ጭማሪ</span></span>
-              <div class="text-4xl sm:text-5xl font-black text-brand-400 tracking-tight">
-                ETB <span x-text="Math.round(roiTables * roiAvgBill * 0.22 * 2.5 * 30).toLocaleString()"></span>
-              </div>
-            </div>
-
-            <!-- Growth Bar Meter -->
-            <div class="space-y-2">
-              <div class="flex justify-between text-[9px] font-black uppercase text-zinc-400">
-                <span>Upsell Lift</span>
-                <span class="text-brand-400">+22.4% Average</span>
-              </div>
-              <div class="w-full h-3 bg-zinc-900 rounded-full overflow-hidden p-0.5 border border-zinc-800">
-                <div class="h-full bg-linear-to-r from-brand-500 to-amber-400 rounded-full transition-all duration-300" :style="'width: ' + Math.min(100, (roiTables * roiAvgBill) / 500) + '%'"></div>
-              </div>
-            </div>
-
-            <button 
-              @click="contactModalOpen = true" 
-              class="w-full bg-brand-500 hover:bg-brand-400 text-black font-black text-xs uppercase tracking-widest py-4 rounded-xl shadow-lg transition-all"
-            >
-              Lock In Revenue Growth
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
 
 
 

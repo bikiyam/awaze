@@ -3,7 +3,7 @@
     <div id="app" v-cloak class="flex h-full w-full bg-slate-100 overflow-hidden">
 
         <!-- Sidebar Navigation (Dark themed as per reference) -->
-        <aside class="fixed h-screen w-20 lg:w-64 bg-[#121824] text-slate-300 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20">
+        <aside class="fixed h-screen w-20 lg:w-64 bg-black text-slate-300 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20">
             <div>
                 <!-- Logo Header -->
                 <div class="h-20 flex items-center px-4 lg:px-6 gap-3 border-b border-slate-800">
@@ -72,15 +72,8 @@
                 <!-- Global Search & User info -->
                 <div class="flex items-center gap-4">
                     <div class="relative hidden md:block w-64">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                        <input v-model="searchQuery" type="text" placeholder="Search menu, orders, settings..." class="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50">
+                        <input v-model="searchQuery" type="text" placeholder="Search menu, orders, settings..." class=" placeholder-black w-full px-2 py-2 bg-slate-100 border-none rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-black">
                     </div>
-
-                    <!-- Notification bell shortcut -->
-                    <button @click="currentTab = 'notification'" class="relative p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all">
-                        <i class="fa-regular fa-bell text-lg"></i>
-                        <span v-if="unreadCount > 0" class="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white text-xs rounded-full flex items-center justify-center font-bold shadow">{{ unreadCount }}</span>
-                    </button>
 
                     <!-- Profile Avatar pill -->
                     <div class="flex items-center gap-3 pl-2 border-l border-slate-200">
@@ -107,7 +100,7 @@
                     <!-- Top Metrics Cards (Sales, Orders, Customers, Tables, Rooms) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                         <!-- Total Sales Card -->
-                        <div class="bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-wallet text-xl"></i>
                             </div>
@@ -120,7 +113,7 @@
                         </div>
 
                         <!-- Total Orders Card -->
-                        <div class="bg-gradient-to-br from-amber-400 to-orange-500 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-cart-shopping text-xl"></i>
                             </div>
@@ -146,7 +139,7 @@
                         </div>
 
                         <!-- Tables Card -->
-                        <div v-if="settings.orderingOption" class="bg-gradient-to-br from-blue-500 to-cyan-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div v-if="settings.orderingOption" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-chair text-xl"></i>
                             </div>
@@ -159,7 +152,7 @@
                         </div>
 
                         <!-- Rooms Card -->
-                        <div v-if="settings.roomIntegration" class="bg-gradient-to-br from-rose-500 to-pink-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div v-if="settings.roomIntegration" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-hotel text-xl"></i>
                             </div>
@@ -203,6 +196,10 @@
                                         <span class="text-slate-500">Branch Status</span>
                                         <span class="font-semibold text-emerald-600">{{ settings.restaurantBranch ? 'Multi-Branch Active' : 'Single Location' }}</span>
                                     </div>
+                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
+                                        <span class="text-slate-500">Plan</span>
+                                        <span class="font-semibold text-emerald-600">Premium</span>
+                                    </div>
                                 </div>
                             </div>
                             <button @click="currentTab = 'items'" class="w-full mt-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold text-sm transition-all shadow-md">
@@ -210,6 +207,22 @@
                             </button>
                         </div>
                     </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black">
+                      <div class="h-20">Dash Item</div>
+                      <div>Dash Item</div>
+                      <div>Dash Item</div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black">
+                      <div class="h-20">Dash Item</div>
+                      <div>Dash Item</div>
+                      <div>Dash Item</div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black">
+                      <div class="h-20">Dash Item</div>
+                      <div>Dash Item</div>
+                      <div>Dash Item</div>
+                    </div>
+                    
                 </div>
 
                 <!-- ================= SUB-PAGE 2: ITEMS (MENU MANAGEMENT) ================= -->
@@ -220,7 +233,7 @@
                             <p class="text-xs text-slate-500 mt-1">Add, edit, view details, or delete items instantly.</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <select v-model="selectedCategoryFilter" class="px-4 py-2 bg-slate-100 border-none rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <select v-model="selectedCategoryFilter" class="px-6 py-2 bg-slate-100 border-none rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                                 <option value="All">All Categories</option>
                                 <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
                             </select>
@@ -310,23 +323,23 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Restaurant Name</label>
-                                <input v-model="restaurant.name" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <input v-model="restaurant.name" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Location / Address</label>
-                                <input v-model="restaurant.location" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <input v-model="restaurant.location" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Phone Number</label>
-                                <input v-model="restaurant.phone" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <input v-model="restaurant.phone" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Cover Image URL</label>
-                                <input v-model="restaurant.image" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <input v-model="restaurant.image" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Description</label>
-                                <textarea v-model="restaurant.description" rows="3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                                <textarea v-model="restaurant.description" rows="3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black"></textarea>
                             </div>
                         </div>
 
@@ -363,6 +376,18 @@
                                 <div>
                                     <h5 class="font-bold text-slate-800 text-sm">Restaurant Branch Management</h5>
                                     <p class="text-xs text-slate-500">Manage multiple physical locations and regional menus under one account.</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" v-model="settings.restaurantBranch" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                                </label>
+                            </div>
+
+                            <!-- Toggle 4: Restaurant Tablet -->
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                                <div>
+                                    <h5 class="font-bold text-slate-800 text-sm">Restaurant Tablet</h5>
+                                    <p class="text-xs text-slate-500">A Restaurant Tablet available for Ordering.</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" v-model="settings.restaurantBranch" class="sr-only peer">

@@ -4,7 +4,7 @@ import Sample from '~/pages/sample.vue';
 </script>
 
 <template><!-- Hero Section -->
-  <section class="relative min-h-[95vh] items-center px-4 py-16 overflow-hidden bg-black">
+  <section class="relative min-h-[95vh] items-center px-4 py-16 overflow-hidden bg-black mt-[-75px]">
     <!-- Ambient Background Glow Circles -->
     <div class="absolute -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-emerald-800 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-transparent rounded-full blur-[90px] pointer-events-none"></div>
