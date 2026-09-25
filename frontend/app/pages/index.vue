@@ -48,6 +48,57 @@ const menuLink = '/menu'
 
 
 
+    <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-7 px-6 py-6 ">
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">01</div>
+        <h3 class="text-[20px]">
+          Complete digital menu setup
+           <span class="block text-sm font-normal normal-case text-brand-300">ጥራት ያለው ሲስተም</span>
+        </h3>
+      </div>
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">02</div>
+        <h3 class="text-[20px]">
+          Professional Food Photography
+           <span class="block text-sm font-normal normal-case text-brand-300">የምግብ ፎቶግራፍ</span>
+        </h3>
+      </div>
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">03</div>
+        <h3 class="text-[20px]">
+          Physical QR Standees 
+           <span class="block text-sm font-normal normal-case text-brand-300">የጠረጴዛ ኪውአር ኮድ</span>
+        </h3>
+      </div>
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">04</div>
+        <h3 class="text-[20px]">
+          Digital Food Ordering Sysytem / Kitchen Notifications
+           <span class="block text-sm font-normal normal-case text-brand-300">የምግብ ማዘዣ ስርዓት / የወጥ ቤት ማሳወቂያዎች</span>
+        </h3>
+      </div>
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">05</div>
+        <h3 class="text-[20px]">
+          Instant Admin Control 
+           <span class="block text-sm font-normal normal-case text-brand-300">ቀላል የአስተዳደር ቁጥጥር</span>
+        </h3>
+      </div>
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">06</div>
+        <h3 class="text-[20px]">
+          Menu Analytics Dashboard
+           <span class="block text-sm font-normal normal-case text-brand-300">የሽያጭ መረጃዎች</span>
+        </h3>
+      </div>
+      <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
+        <div class="text-brand-500 font-black text-4xl tracking-widest py-7">07</div>
+        <h3 class="text-[20px]">
+          Games for Food waiting People 
+           <span class="block text-sm font-normal normal-case text-brand-300">ምግብ ለሚጠብቁ ሰዎች የሚሆኑ ጨዋታዎች</span>
+        </h3>
+      </div>
+    </div>
     <!-- Line-Segmented Feature List instead of heavy cards -->
     <div class="divide-y divide-brand-900/40 border-y border-brand-900/40 text-xl sm:text-2xl font-black uppercase text-white group-hover:text-brand-400 transition-colors">
       

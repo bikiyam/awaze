@@ -1,29 +1,18 @@
 <template>
-  <div :class="{ 'light-theme': !isDark }" class="flex flex-col min-h-screen transition-colors duration-300 bg-[#050806] text-white font-sans antialiased selection:bg-emerald-500 selection:text-black">
-    
-    <header class="sticky top-0 z-40 bg-[#050806]/95 backdrop-blur-md border-b border-emerald-950/40 px-4 py-3.5 md:px-8">
-      <div class="max-w-7xl mx-auto flex sm:flex-row items-center justify-between gap-4">
+  <div :class="{ 'light-theme': !isDark }" class="flex flex-col min-h-screen transition-colors duration-300 bg-black text-white font-sans antialiased selection:bg-emerald-500 selection:text-black">
+    <header class="sticky top-0 z-40 bg-transparent backdrop-blur-md border-b border-emerald-950/40 px-4 py-3.5 md:px-8">
+      <div class=" max-w-7xl mx-auto flex sm:flex-row items-center justify-between gap-4">
         
         <NuxtLink to="/">
-          <div class="flex items-center space-x-3 self-start sm:self-center min-w-[150px]">
-            <div class="h-10 w-10 md:h-12 md:w-12 p-[3px] shadow-lg shadow-emerald-950/50">
-              <div class="w-full h-full flex items-center justify-center">
+          <div class="flex items-center space-x-3 self-start sm:self-center ">
+              <div class="p-[2px] group-hover:scale-105 transition-transform">
                 <img 
-                  src="/assets/images/awaze_logo.png" 
+                  src="/assets/AwazeLogo0.2.png" 
+                  class=" w-24 h-8 md:h-10"
                   alt="Logo" 
                   @error="onImgError($event, 'https://placehold.co/100x100/0d1410/10b981?text=AWAZE')"
                 />
               </div>
-            </div>
-            <div>
-              <div class="flex flex-col">
-                <div class="flex items-baseline gap-1.5">
-                  <h1 class="font-black text-lg md:text-2xl tracking-tight text-white uppercase leading-none">AWAZE</h1>
-                  <span class="text-zinc-400 font-bold text-xs md:text-sm">/ አዋዜ</span>
-                </div>
-                <span class="text-emerald-400 text-[10px] uppercase font-semibold tracking-widest mt-1">Digital Menu</span>
-              </div>
-            </div>
           </div>
         </NuxtLink>
 
@@ -88,7 +77,7 @@
         <div class="mb-8">
           <p class="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">Browse</p>
           <h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase tracking-tight">Restaurants</h2>
-          <p class="text-zinc-400 text-sm mt-2 max-w-xl">Choose a restaurant to open its digital menu and place an order.</p>
+          <p class="text-zinc-400 text-sm mt-2 max-w-xl">Choose a restaurant to open its digital menu and Browse Menu.</p>
         </div>
 
         <div v-if="directoryLoading" class="py-20 text-center text-zinc-400 text-sm">
@@ -159,27 +148,33 @@
 
       <template v-else>
       
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#0a140f] to-[#030604] border border-emerald-950/60 p-4 md:p-8 mb-4">
-        <div class="absolute right-0 top-0 h-full w-1/3 opacity-15 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-400 via-transparent to-transparent"></div>
-        <div class="relative z-10 max-w-2xl">
-          <div class="flex items-center gap-4">
-            <NuxtLink to="/menu" class="text-zinc-500 hover:text-emerald-400 text-xs font-bold uppercase tracking-wider shrink-0 self-start mt-1">← All</NuxtLink>
+        <!------    Selected Restaurant Profile     ----->
+
+      <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#0a140f] to-black border border-emerald-950/60 p-4 md:p-8 mb-4">
+        <div class="absolute right-0 top-0 h-full w-full opacity-15 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-400 via-transparent to-transparent"></div>
+        <div class="relative z-10 w-full">
+          <div class="flex items-center">
+            <NuxtLink to="/menu" class="text-zinc-500 hover:text-emerald-400 text-xs font-bold uppercase tracking-wider shrink-0 self-start mt-1 hidden">←</NuxtLink>
+            
+            <div class="flex flex-col">
+              <h2 class="text-white text-2xl md:text-3xl uppercase tracking-wide font-extrabold leading-tight">{{ currentRestaurant.name }}</h2>
+              <span v-if="currentRestaurant.amharicName" class="text-white text-lg md:text-xl font-bold mt-1">{{ currentRestaurant.amharicName }}</span>
+            </div>
             <img 
               :src="currentRestaurant.logo" 
               :alt="currentRestaurant.name + ' logo'"
-              class="h-12 w-12 md:h-14 md:w-14 object-cover shadow-md shrink-0 bg-[#050806]"
+              class="h-12 w-12 md:h-14 md:w-14 object-cover shadow-md shrink-0 bg-transparent ml-auto"
               @error="onImgError($event, 'https://placehold.co/100x100/0d1410/10b981?text=LOGO')"
             />
-            <div class="flex flex-col">
-              <h2 class="text-emerald-400 text-2xl md:text-3xl uppercase tracking-wide font-extrabold leading-tight">{{ currentRestaurant.name }}</h2>
-              <span v-if="currentRestaurant.amharicName" class="text-emerald-300 text-lg md:text-xl font-bold mt-1">{{ currentRestaurant.amharicName }}</span>
-            </div>
           </div>
         </div>
       </div>
 
+
+        <!------    Selected Restaurant Profile     ----->
+        
       <div id="menu-list-section" ref="menuListSection" class="scroll-mt-20 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-emerald-950/40">
-        <div class="flex bg-[#0d1410] p-1 rounded-lg border border-emerald-950 max-w-max">
+        <div class="flex bg-black p-1 rounded-lg border border-emerald-950 max-w-max">
           <button 
             @click="setMenuType('all')"
             :class="activeType === 'all' ? 'bg-white text-black shadow-lg' : 'text-zinc-400 hover:text-white'"
@@ -945,11 +940,11 @@ const i18n = {
     q4: "Hygienic Preparation",
     waiterNote: "Need customized spice levels or dietary adaptations? Inform your table waiter.",
     closeCard: "Close Detail Card",
-    digitalMenu: "AWAZE DIGITAL MENU",
+    digitalMenu: "AWAZE DIGITALS",
     standards: "Quality Standards",
     terms: "Terms of Dining",
     desk: "Chef's Desk",
-    rights: "© 2026 Awaze Menu. All rights reserved.",
+    rights: "© 2026 Bolale Creatives. All rights reserved.",
     prep: "Prep:",
     reviews: "reviews",
     customerFeedback: "Customer Ratings & Feedback",
@@ -1003,7 +998,7 @@ const i18n = {
 }
 
 const categories = reactive([
-  { id: 'all', name: 'All Items', amharicName: 'ሁሉም እቃዎች', iconName: 'grid' },
+  { id: 'all', name: 'All', amharicName: 'ሁሉም', iconName: 'grid' },
   /*
   { id: 'Meat', name: 'Meat', amharicName: 'ሥጋ', iconName: 'utensils' },
   { id: 'Burger', name: 'Burger', amharicName: 'በርገር', iconName: 'utensils' },
@@ -1726,7 +1721,7 @@ async function updateRestaurantSlug() {
   }
 
   categories.length = 0
-  categories.push({ id: 'all', name: 'All Items', amharicName: 'ሁሉም እቃዎች', iconName: 'grid' })
+  categories.push({ id: 'all', name: 'All', amharicName: 'ሁሉም', iconName: 'grid' })
 
   if (restData.categories && Array.isArray(restData.categories)) {
     for (const cat of restData.categories) {
