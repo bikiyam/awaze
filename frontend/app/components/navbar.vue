@@ -17,13 +17,19 @@ import SampleMenu from '~/pages/sample.vue';
       </a>
 
       <!-- Primary Action CTA -->
-      <NuxtLink to="sample">
+      <div class="flex gap-3">
+        <NuxtLink to="menu/girum">
+          <a href="../pages/menu/girum">
+            <h1 class="flex items-center space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-2 md:px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">See Sample Menu</h1>
+          </a>
+        </NuxtLink>
+        <NuxtLink to="admin/dashboard">
+          <a href="../pages/admin/dashboard">
+            <h1 class="flex items-center space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-2 md:px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">See Sample Dashboard</h1>
+          </a>
+        </NuxtLink>
       
-      <a href="../pages/sample.vue">
-        <h1 class="flex items-center space-x-4 shimmer-button bg-brand-500 hover:bg-brand-400 text-center text-black font-black text-[11px] uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">Get sample</h1>
-      </a>
-
-      </NuxtLink>
+      </div>
     </div>
   </header>
 </template>

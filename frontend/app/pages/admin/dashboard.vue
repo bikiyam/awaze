@@ -3,17 +3,11 @@
     <div id="app" v-cloak class="flex h-full w-full bg-slate-100 overflow-hidden">
 
         <!-- Sidebar Navigation (Dark themed as per reference) -->
-        <aside class="fixed h-screen w-20 lg:w-64 bg-black text-slate-300 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20">
+        <aside class="fixed h-screen w-20 lg:w-64 bg-black text-slate-300 border-r border-r-gray-600 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20">
             <div>
                 <!-- Logo Header -->
-                <div class="h-20 flex items-center px-4 lg:px-6 gap-3 border-b border-slate-800">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-emerald-500/30">
-                        A
-                    </div>
-                    <div class="hidden lg:block overflow-hidden">
-                        <h1 class="text-white font-bold text-base truncate">AWAZE</h1>
-                        <span class="text-xs text-emerald-400 font-medium">Admin Dashboard</span>
-                    </div>
+                <div class=" px-7 py-7 group-hover:scale-105 transition-transform">
+                  <img src="/assets/AwazeLogo0.2.png" class=" w-20 h-8" alt="Logo">
                 </div>
 
                 <!-- Navigation Links -->
@@ -62,25 +56,25 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 flex flex-col h-full overflow-hidden pl-20 lg:pl-64">
+        <main class="flex-1 flex flex-col h-full overflow-hidden pl-20 lg:pl-64 bg-black">
             <!-- Top Navbar matching Frame 7 reference -->
-            <header class="fixed h-20 bg-white border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0 shadow-sm z-10 w-full lg:pr-72">
+            <header class="fixed h-20 bg-black border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0 shadow-sm z-10 w-full lg:pr-72 text-white">
                 <div class="flex items-center gap-4 w-1/3">
-                    <h2 class="text-xl font-bold text-slate-800 capitalize">{{ currentTabTitle }}</h2>
+                    <h2 class="text-xl font-bold capitalize">{{ currentTabTitle }}</h2>
                 </div>
 
                 <!-- Global Search & User info -->
                 <div class="flex items-center gap-4">
                     <div class="relative hidden md:block w-64">
-                        <input v-model="searchQuery" type="text" placeholder="Search menu, orders, settings..." class=" placeholder-black w-full px-2 py-2 bg-slate-100 border-none rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-black">
+                        <input v-model="searchQuery" type="text" placeholder="Search menu, orders, settings..." class=" placeholder-white w-full px-2 py-2 bg-black border border-gray-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-white">
                     </div>
 
                     <!-- Profile Avatar pill -->
                     <div class="flex items-center gap-3 pl-2 border-l border-slate-200">
                         <img :src="restaurant.image || 'https://placehold.co/100x100/10b981/ffffff?text=Res'" class="w-10 h-10 rounded-xl object-cover shadow" alt="Admin">
-                        <div class="hidden sm:block text-left">
-                            <h4 class="text-sm font-bold text-slate-800 leading-tight">{{ restaurant.name }}</h4>
-                            <span class="text-xs text-slate-500 font-medium">Manager / Admin</span>
+                        <div class="hidden sm:block text-left text-gray-400">
+                            <h4 class="text-sm font-bold leading-tight">{{ restaurant.name }}</h4>
+                            <span class="text-xs font-medium">Manager / Admin</span>
                         </div>
                     </div>
                 </div>
@@ -100,11 +94,11 @@
                     <!-- Top Metrics Cards (Sales, Orders, Customers, Tables, Rooms) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                         <!-- Total Sales Card -->
-                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-wallet text-xl"></i>
                             </div>
-                            <p class="text-purple-100 text-xs font-semibold uppercase tracking-wider">Total Views</p>
+                            <p class="text-xs font-black uppercase tracking-wider">Total Views</p>
                             <h3 class="text-3xl font-extrabold mt-2">${{ totalSales.toLocaleString() }}</h3>
                             <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-arrow-trend-up"></i>
@@ -113,11 +107,11 @@
                         </div>
 
                         <!-- Total Orders Card -->
-                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-cart-shopping text-xl"></i>
                             </div>
-                            <p class="text-amber-100 text-xs font-semibold uppercase tracking-wider">Total Orders</p>
+                            <p class="text-xs font-black uppercase tracking-wider">Total Orders</p>
                             <h3 class="text-3xl font-extrabold mt-2">{{ totalOrders }}</h3>
                             <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-arrow-trend-up"></i>
@@ -126,11 +120,11 @@
                         </div>
 
                         <!-- Menu Stats Card -->
-                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-utensils text-xl"></i>
                             </div>
-                            <p class="text-emerald-100 text-xs font-semibold uppercase tracking-wider">Foods & Drinks / Categories</p>
+                            <p class="text-xs font-black uppercase tracking-wider">Foods & Drinks / Categories</p>
                             <h3 class="text-3xl font-extrabold mt-2">{{ foods.length }} <span class="text-lg font-normal">/ {{ categories.length }}</span></h3>
                             <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-tag"></i>
@@ -139,11 +133,11 @@
                         </div>
 
                         <!-- Tables Card -->
-                        <div v-if="settings.orderingOption" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div v-if="settings.orderingOption" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-chair text-xl"></i>
                             </div>
-                            <p class="text-blue-100 text-xs font-semibold uppercase tracking-wider">Active Tables</p>
+                            <p class="text-xs font-black uppercase tracking-wider">Active Tables</p>
                             <h3 class="text-3xl font-extrabold mt-2">{{ tablesCount }}</h3>
                             <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-qrcode"></i>
@@ -152,11 +146,11 @@
                         </div>
 
                         <!-- Rooms Card -->
-                        <div v-if="settings.roomIntegration" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div v-if="settings.roomIntegration" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-hotel text-xl"></i>
                             </div>
-                            <p class="text-rose-100 text-xs font-semibold uppercase tracking-wider">Hotel Rooms</p>
+                            <p class="text-xs font-black uppercase tracking-wider">Hotel Rooms</p>
                             <h3 class="text-3xl font-extrabold mt-2">{{ roomsCount }}</h3>
                             <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-door-open"></i>
@@ -168,37 +162,37 @@
                     <!-- Quick Overview Grids (Charts & Tables) -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Left 2 cols: Customer Satisfaction / Revenue Trend -->
-                        <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="lg:col-span-2 bg-linear-to-b from-black to-obsidian-900 border border-slate-700 p-6 rounded-2xl shadow-sm">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="font-bold text-slate-800 text-lg">Customer Satisfaction & Sales Flow</h3>
-                                <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">Live Analytics</span>
+                                <h3 class="font-bold text-lg">Customer Satisfaction & Sales Flow</h3>
+                                <span class="text-xs font-medium text-black bg-emerald-50 px-3 py-1 rounded-full">Live Analytics</span>
                             </div>
-                            <div class="h-72 relative">
+                            <div class="h-72 relative text-white">
                                 <canvas id="statusChart"></canvas>
                             </div>
                         </div>
 
                         <!-- Right 1 col: Branch & Status info -->
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div class="bg-linear-to-b from-black to-obsidian-900  p-6 rounded-2xl shadow-sm flex flex-col justify-between text-white">
                             <div>
-                                <h3 class="font-bold text-slate-800 text-lg mb-2">Restaurant Profile</h3>
+                                <h3 class="font-bold text-lg mb-2">Restaurant Profile</h3>
                                 <p class="text-xs text-slate-500 mb-4">{{ restaurant.description }}</p>
                                 <div class="space-y-3">
                                     <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
                                         <span class="text-slate-500">Location</span>
-                                        <span class="font-semibold text-slate-800">{{ restaurant.location }}</span>
+                                        <span class="font-semibold ">{{ restaurant.location }}</span>
                                     </div>
                                     <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
                                         <span class="text-slate-500">Phone</span>
-                                        <span class="font-semibold text-slate-800">{{ restaurant.phone }}</span>
+                                        <span class="font-semibold ">{{ restaurant.phone }}</span>
                                     </div>
                                     <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
                                         <span class="text-slate-500">Branch Status</span>
-                                        <span class="font-semibold text-emerald-600">{{ settings.restaurantBranch ? 'Multi-Branch Active' : 'Single Location' }}</span>
+                                        <span class="font-semibold ">{{ settings.restaurantBranch ? 'Multi-Branch Active' : 'Single Location' }}</span>
                                     </div>
                                     <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
                                         <span class="text-slate-500">Plan</span>
-                                        <span class="font-semibold text-emerald-600">Premium</span>
+                                        <span class="font-semibold">Premium</span>
                                     </div>
                                 </div>
                             </div>
@@ -207,35 +201,30 @@
                             </button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black">
-                      <div class="h-20">Dash Item</div>
-                      <div>Dash Item</div>
-                      <div>Dash Item</div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
+                      <div class="h-50 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
+                      <div></div>
+                      <div class="h-50 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
                     </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black">
-                      <div class="h-20">Dash Item</div>
-                      <div>Dash Item</div>
-                      <div>Dash Item</div>
-                    </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black">
-                      <div class="h-20">Dash Item</div>
-                      <div>Dash Item</div>
-                      <div>Dash Item</div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
+                      <div class="h-20"></div>
+                      <div class="h-72 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
+                      <div class="h-56 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
                     </div>
                     
                 </div>
 
                 <!-- ================= SUB-PAGE 2: ITEMS (MENU MANAGEMENT) ================= -->
                 <div v-if="currentTab === 'items'" class="space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-white bg-black p-6 rounded-2xl shadow-sm border border-slate-800">
                         <div>
-                            <h3 class="text-xl font-bold text-slate-800">Menu Catalog (Foods & Drinks)</h3>
-                            <p class="text-xs text-slate-500 mt-1">Add, edit, view details, or delete items instantly.</p>
+                            <h3 class="text-xl font-bold ">Menu List (Foods & Drinks)</h3>
+                            <p class="text-xs mt-1">Add, edit, view details, or delete items instantly.</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <select v-model="selectedCategoryFilter" class="px-6 py-2 bg-slate-100 border-none rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
+                            <select v-model="selectedCategoryFilter" class="px-3 py-2 bg-gray-700 border-none rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-white ">
                                 <option value="All">All Categories</option>
-                                <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
+                                <option v-for="cat in categories" :key="cat" :value="cat" class="px-3">{{ cat }}</option>
                             </select>
                             <button @click="openAddFoodModal" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2">
                                 <i class="fa-solid fa-plus"></i> Add New Item
@@ -245,7 +234,7 @@
 
                     <!-- Foods Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div v-for="food in filteredFoods" :key="food.id" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition-all group">
+                        <div v-for="food in filteredFoods" :key="food.id" class="bg-slate-300 rounded-2xl shadow-sm border border-slate-700 overflow-hidden flex flex-col justify-between hover:shadow-md transition-all group">
                             <div>
                                 <div class="relative h-48 overflow-hidden bg-slate-100">
                                     <img :src="food.image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Food">
@@ -257,28 +246,26 @@
                                     <p class="text-xs text-slate-500 mt-1 line-clamp-2">{{ food.description }}</p>
                                 </div>
                             </div>
-                            <div class="p-5 pt-0 flex items-center justify-between border-t border-slate-100 mt-4">
-                                <button @click="viewFoodDetails(food)" class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-eye"></i> View & Edit
+                            <div class="p-5 pt-0 flex items-center justify-between">
+                                <button @click="viewFoodDetails(food)" class="text-xs font-black text-white bg-black px-6 py-3 rounded-2xl hover:scale-105">
+                                    <i class="fa-solid fa-eye"></i> View Details
                                 </button>
-                                <div class="flex items-center gap-2">
-                                    <button @click="editFood(food)" class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" title="Edit">
-                                        <i class="fa-solid fa-pen text-sm"></i>
-                                    </button>
-                                    <button @click="deleteFood(food.id)" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all" title="Delete">
-                                        <i class="fa-solid fa-trash text-sm"></i>
-                                    </button>
-                                </div>
+                                  <button @click="editFood(food)" class="text-xs font-black text-black bg-white px-6 py-3 rounded-2xl hover:scale-105" title="Edit">
+                                      <i class="fa-solid fa-pen text-sm"></i>Edit
+                                  </button>
+                                  <button @click="deleteFood(food.id)" class="text-xs font-black text-black bg-white px-6 py-3 rounded-2xl hover:scale-105" title="Delete">
+                                      <i class="fa-solid fa-trash text-sm"></i>Delete
+                                  </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ================= SUB-PAGE 3: NOTIFICATION (ACTIVITY & COMMENTS) ================= -->
-                <div v-if="currentTab === 'notification'" class="space-y-6">
-                    <div class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div v-if="currentTab === 'notification'" class="space-y-6 min-h-screen overflow-y-hidden">
+                    <div class="flex items-center justify-between bg-black text-white p-6 rounded-2xl shadow-sm border border-slate-700">
                         <div>
-                            <h3 class="text-xl font-bold text-slate-800">Customer Activity & Feedback</h3>
+                            <h3 class="text-xl font-bold">Customer Activity & Feedback</h3>
                             <p class="text-xs text-slate-500 mt-1">Real-time comments, ratings, and customer reviews on your menu.</p>
                         </div>
                         <button @click="markAllNotificationsRead" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-all">
@@ -287,10 +274,10 @@
                     </div>
 
                     <div class="space-y-4">
-                        <div v-for="notif in notifications" :key="notif.id" :class="notif.unread ? 'border-l-4 border-emerald-500 bg-emerald-50/40' : 'bg-white'" class="p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+                        <div v-for="notif in notifications" :key="notif.id" :class="notif.unread ? 'border-l-4 border-white bg-slate-200' : 'bg-slate-400'" class="p-5  rounded-2xl shadow-sm border border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
                             <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg flex-shrink-0">
-                                    <i class="fa-solid fa-comment-dots"></i>
+                                <div class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center font-bold text-lg ">
+                                    <i class="fa-solid fa-comment-dots"></i>S
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-2">
@@ -323,23 +310,23 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Restaurant Name</label>
-                                <input v-model="restaurant.name" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
+                                <input v-model="restaurant.name" type="text" class="w-full px-4 py-3 bg-slate-200 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Location / Address</label>
-                                <input v-model="restaurant.location" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
+                                <input v-model="restaurant.location" type="text" class="w-full px-4 py-3 bg-slate-200 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Phone Number</label>
-                                <input v-model="restaurant.phone" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
+                                <input v-model="restaurant.phone" type="text" class="w-full px-4 py-3 bg-slate-200 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Cover Image URL</label>
-                                <input v-model="restaurant.image" type="text" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
+                                <input v-model="restaurant.image" type="text" class="w-full px-4 py-3 bg-slate-200 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Description</label>
-                                <textarea v-model="restaurant.description" rows="3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black"></textarea>
+                                <textarea v-model="restaurant.description" rows="3" class="w-full px-4 py-3 bg-slate-200 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black"></textarea>
                             </div>
                         </div>
 
@@ -348,10 +335,10 @@
                             <h4 class="font-bold text-slate-800 text-base">Advanced Feature Toggles</h4>
                             
                             <!-- Toggle 1: Ordering Option -->
-                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <div class="flex items-center justify-between p-4 bg-slate-200 rounded-2xl border border-slate-200">
                                 <div>
                                     <h5 class="font-bold text-slate-800 text-sm">Ordering Option (Multiple Tables & QR Codes)</h5>
-                                    <p class="text-xs text-slate-500">Enable table-specific QR code ordering for dine-in customers.</p>
+                                    <p class="text-xs text-slate-200">Enable table-specific QR code ordering for dine-in customers.</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" v-model="settings.orderingOption" class="sr-only peer">
@@ -360,31 +347,31 @@
                             </div>
 
                             <!-- Toggle 2: Room Integration -->
-                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <div class="flex items-center justify-between p-4 bg-slate-200 rounded-2xl border border-slate-200">
                                 <div>
                                     <h5 class="font-bold text-slate-800 text-sm">Room Integration (Hotel Rooms & QR Codes)</h5>
                                     <p class="text-xs text-slate-500">Enable room service ordering with dedicated room QR codes.</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" v-model="settings.roomIntegration" class="sr-only peer">
-                                    <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
                                 </label>
                             </div>
 
                             <!-- Toggle 3: Restaurant Branch -->
-                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <div class="flex items-center justify-between p-4 bg-slate-200 rounded-2xl border border-slate-200">
                                 <div>
                                     <h5 class="font-bold text-slate-800 text-sm">Restaurant Branch Management</h5>
                                     <p class="text-xs text-slate-500">Manage multiple physical locations and regional menus under one account.</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" v-model="settings.restaurantBranch" class="sr-only peer">
-                                    <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
                                 </label>
                             </div>
 
                             <!-- Toggle 4: Restaurant Tablet -->
-                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <div class="flex items-center justify-between p-4 bg-slate-200 rounded-2xl border border-slate-200">
                                 <div>
                                     <h5 class="font-bold text-slate-800 text-sm">Restaurant Tablet</h5>
                                     <p class="text-xs text-slate-500">A Restaurant Tablet available for Ordering.</p>
@@ -409,22 +396,22 @@
                 <div v-if="currentTab === 'analytics'" class="space-y-6">
                     <!-- Top Metric Cards for Analytics -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <p class="text-xs font-bold text-slate-400 uppercase">QR Scans / Page Views</p>
                             <h3 class="text-3xl font-extrabold text-slate-800 mt-2">24,850</h3>
                             <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded mt-2 inline-block">+18% this week</span>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <p class="text-xs font-bold text-slate-400 uppercase">Total Orders</p>
                             <h3 class="text-3xl font-extrabold text-slate-800 mt-2">3,420</h3>
                             <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded mt-2 inline-block">+6% this week</span>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <p class="text-xs font-bold text-slate-400 uppercase">Avg Views / Day</p>
                             <h3 class="text-3xl font-extrabold text-slate-800 mt-2">845</h3>
                             <span class="text-xs text-blue-600 font-semibold bg-blue-50 px-2 py-0.5 rounded mt-2 inline-block">Consistent traffic</span>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <p class="text-xs font-bold text-slate-400 uppercase">Avg Orders / Day</p>
                             <h3 class="text-3xl font-extrabold text-slate-800 mt-2">114</h3>
                             <span class="text-xs text-purple-600 font-semibold bg-purple-50 px-2 py-0.5 rounded mt-2 inline-block">High conversion</span>
@@ -433,13 +420,13 @@
 
                     <!-- Charts Grid -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <h3 class="font-bold text-slate-800 text-lg mb-4">Daily / Weekly Visitors</h3>
                             <div class="h-64 relative">
                                 <canvas id="visitorChart"></canvas>
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <h3 class="font-bold text-slate-800 text-lg mb-4">Peak Working Times (Hourly Traffic)</h3>
                             <div class="h-64 relative">
                                 <canvas id="peakChart"></canvas>
@@ -448,7 +435,7 @@
                     </div>
 
                     <!-- Top 10 Most Viewed Foods Table -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                         <h3 class="font-bold text-slate-800 text-lg mb-4">Top 10 Most Viewed Foods & Drinks</h3>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
@@ -480,7 +467,7 @@
 
                 <!-- ================= SUB-PAGE 6: SUBSCRIPTION ================= -->
                 <div v-if="currentTab === 'subscription'" class="space-y-6">
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="bg-gradient-to-br from-black to-slate-500 text-white p-8 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div>
                             <span class="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">Current Plan</span>
                             <h3 class="text-3xl font-extrabold mt-3">{{ subscription.currentPlan }}</h3>
@@ -561,36 +548,36 @@
                         <h4 class="font-extrabold text-2xl text-slate-800">{{ modal.data.name }}</h4>
                         <span class="inline-block mt-1 px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg">{{ modal.data.category }}</span>
                         <p class="text-sm text-slate-600 mt-4">{{ modal.data.description }}</p>
-                        <div class="mt-6 flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="mt-6 flex items-center justify-between p-4 bg-slate-200 rounded-xl border border-slate-200">
                             <span class="text-sm font-bold text-slate-600">Price</span>
-                            <span class="text-xl font-black text-emerald-600">${{ modal.data.price }}</span>
+                            <span class="text-xl font-black  text-emerald-600">${{ modal.data.price }}</span>
                         </div>
                     </div>
 
                     <div v-else class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Item Name</label>
-                            <input v-model="modal.data.name" type="text" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <input v-model="modal.data.name" type="text" class="w-full px-4 py-2.5 bg-slate-200 text-black border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Category</label>
-                                <select v-model="modal.data.category" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <select v-model="modal.data.category" class="w-full px-4 py-2.5 bg-slate-200 text-black border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                     <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Price ($)</label>
-                                <input v-model.number="modal.data.price" type="number" step="0.01" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <input v-model.number="modal.data.price" type="number" step="0.01" class="w-full px-4 py-2.5 bg-slate-200 text-black border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Image URL</label>
-                            <input v-model="modal.data.image" type="text" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <input v-model="modal.data.image" type="text" class="w-full px-4 py-2.5 bg-slate-200 text-black border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Description</label>
-                            <textarea v-model="modal.data.description" rows="3" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                            <textarea v-model="modal.data.description" rows="3" class="w-full px-4 py-2.5 bg-slate-200 text-black border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
                         </div>
                     </div>
                 </div>
