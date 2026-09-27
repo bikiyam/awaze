@@ -32,10 +32,6 @@ const menuLink = '/menu'
   <div class="block md:hidden">
     <Heromob/>
   </div>
-  
-
-
-
 
   <!-- Core Deliverables Section (Non-Card Layout) -->
   <section class="py-24 px-6 max-w-6xl mx-auto border-t border-brand-900/20">

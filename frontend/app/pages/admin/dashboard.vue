@@ -3,38 +3,40 @@
     <div id="app" v-cloak class="flex h-full w-full bg-slate-100 overflow-hidden">
 
         <!-- Sidebar Navigation (Dark themed as per reference) -->
-        <aside class="fixed h-screen w-20 lg:w-64 bg-black text-slate-300 border-r border-r-gray-600 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20">
+        <aside class="fixed h-screen w-20 lg:w-64 bg-black text-slate-300 bg-linear-to-b from-obsidian-900 to-black border border-gray-800 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20  rounded-br-3xl rounded-tr-3xl">
             <div>
                 <!-- Logo Header -->
-                <div class=" px-7 py-7 group-hover:scale-105 transition-transform">
-                  <img src="/assets/AwazeLogo0.2.png" class=" w-20 h-8" alt="Logo">
-                </div>
+                <NuxtLink to="/">
+                  <div class=" px-2 md:px-7 py-7 group-hover:scale-105 transition-transform">
+                    <img src="/assets/AwazeLogo0.2.png" class=" w-20 h-7" alt="Logo">
+                  </div>
+                </NuxtLink>
 
                 <!-- Navigation Links -->
-                <nav class="p-3 space-y-2 mt-4">
-                    <button @click="currentTab = 'status'" :class="currentTab === 'status' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-800 text-slate-400 hover:text-white'" class="w-full flex items-center gap-4 px-3.5 py-3 rounded-xl transition-all font-medium text-sm">
-                        <i class="fa-solid fa-chart-pie text-lg w-5 text-center"></i>
+                <nav class="py-3 pl-5 px-2 space-y-7 mt-4">
+                    <button @click="currentTab = 'status'" :class="currentTab === 'status' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">D</h1>
                         <span class="hidden lg:block">Status (Dashboard)</span>
                     </button>
-                    <button @click="currentTab = 'items'" :class="currentTab === 'items' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-800 text-slate-400 hover:text-white'" class="w-full flex items-center gap-4 px-3.5 py-3 rounded-xl transition-all font-medium text-sm">
-                        <i class="fa-solid fa-utensils text-lg w-5 text-center"></i>
+                    <button @click="currentTab = 'items'" :class="currentTab === 'items' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">I</h1>
                         <span class="hidden lg:block">Items / Menu</span>
                     </button>
-                    <button @click="currentTab = 'notification'" :class="currentTab === 'notification' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-800 text-slate-400 hover:text-white'" class="w-full flex items-center gap-4 px-3.5 py-3 rounded-xl transition-all font-medium text-sm relative">
-                        <i class="fa-solid fa-bell text-lg w-5 text-center"></i>
+                    <button @click="currentTab = 'notification'" :class="currentTab === 'notification' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm relative">
+                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">N</h1>
                         <span class="hidden lg:block">Notification</span>
                         <span v-if="unreadCount > 0" class="absolute right-3 lg:right-4 top-3 px-1.5 py-0.5 bg-rose-500 text-white text-[10px] rounded-full font-bold">{{ unreadCount }}</span>
                     </button>
-                    <button @click="currentTab = 'analytics'" :class="currentTab === 'analytics' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-800 text-slate-400 hover:text-white'" class="w-full flex items-center gap-4 px-3.5 py-3 rounded-xl transition-all font-medium text-sm">
-                        <i class="fa-solid fa-chart-line text-lg w-5 text-center"></i>
+                    <button @click="currentTab = 'analytics'" :class="currentTab === 'analytics' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black  py-2">A</h1>
                         <span class="hidden lg:block">Analytics</span>
                     </button>
-                    <button @click="currentTab = 'subscription'" :class="currentTab === 'subscription' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-800 text-slate-400 hover:text-white'" class="w-full flex items-center gap-4 px-3.5 py-3 rounded-xl transition-all font-medium text-sm">
-                        <i class="fa-solid fa-wallet text-lg w-5 text-center"></i>
+                    <button @click="currentTab = 'subscription'" :class="currentTab === 'subscription' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <h1 class="font-extrabold text-center w-full md:w-12 rounded-2xl bg-gray-200 text-black py-2 hover:scale-110">S</h1>
                         <span class="hidden lg:block">Subscription</span>
                     </button>
-                    <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-800 text-slate-400 hover:text-white'" class="w-full flex items-center gap-4 px-3.5 py-3 rounded-xl transition-all font-medium text-sm">
-                        <i class="fa-solid fa-gear text-lg w-5 text-center"></i>
+                    <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <h1 class="font-extrabold text-center w-full md:w-12 rounded-2xl bg-gray-200 text-black py-2">S</h1>
                         <span class="hidden lg:block">Settings</span>
                     </button>
                 </nav>
