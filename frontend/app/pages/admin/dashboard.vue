@@ -8,7 +8,7 @@
                 <!-- Logo Header -->
                 <NuxtLink to="/">
                   <div class=" px-2 md:px-7 py-7 group-hover:scale-105 transition-transform">
-                    <img src="/assets/AwazeLogo0.2.png" class=" w-20 h-7" alt="Logo">
+                    <img src="/assets/AwazeLogo0.2.png" class=" md:w-18 w-20 h-7" alt="Logo">
                   </div>
                 </NuxtLink>
 
@@ -16,11 +16,11 @@
                 <nav class="py-3 pl-5 px-2 space-y-7 mt-4">
                     <button @click="currentTab = 'status'" :class="currentTab === 'status' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
                         <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">D</h1>
-                        <span class="hidden lg:block">Status (Dashboard)</span>
+                        <span class="hidden lg:block">Dashboard</span>
                     </button>
                     <button @click="currentTab = 'items'" :class="currentTab === 'items' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
-                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">I</h1>
-                        <span class="hidden lg:block">Items / Menu</span>
+                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">M</h1>
+                        <span class="hidden lg:block">Menu Items</span>
                     </button>
                     <button @click="currentTab = 'notification'" :class="currentTab === 'notification' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm relative">
                         <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">N</h1>
