@@ -47,6 +47,7 @@ const menuLink = '/menu'
     </div>
 
 
+<!---------
 
     <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-7 px-6 py-6 ">
       <div class="p-6 text-2xl text-white font-bold border border-brand-800 rounded-xl w-full items-center text-center">
@@ -99,6 +100,10 @@ const menuLink = '/menu'
         </h3>
       </div>
     </div>
+
+
+
+    ---------->
     <!-- Line-Segmented Feature List instead of heavy cards -->
     <div class="divide-y divide-brand-900/40 border-y border-brand-900/40 text-xl sm:text-2xl font-black uppercase text-white group-hover:text-brand-400 transition-colors">
       
