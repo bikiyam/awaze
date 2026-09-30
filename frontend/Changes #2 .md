@@ -180,3 +180,25 @@ Actual backend:
 # Notes to take 
 
 - Please Finish it Asap.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Ideas to add on this page
+- Pricing and Packages on database that only superadmin can set
+- Pre made categories with their images
+- Make the restaurant logo on the menu page pull fron the 
+- Share icon in food

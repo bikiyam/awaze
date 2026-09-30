@@ -1,14 +1,14 @@
 <template>
   <div :class="{ 'light-theme': !isDark }" class="flex flex-col min-h-screen transition-colors duration-300 bg-black text-white font-sans antialiased selection:bg-emerald-500 selection:text-black">
-    <header class="sticky top-0 z-40 bg-transparent backdrop-blur-md border-b border-emerald-950/40 px-4 py-3.5 md:px-8">
-      <div class=" max-w-7xl mx-auto flex sm:flex-row items-center justify-between gap-4">
+    <header class="sticky top-0 z-40 bg-transparent backdrop-blur-3xl px-4 py-2 md:px-8 ">
+      <div class=" max-w-7xl mx-auto flex sm:flex-row items-center justify-between gap-16">
         
         <NuxtLink to="/">
-          <div class="flex items-center space-x-3 self-start sm:self-center ">
-              <div class="p-[2px] group-hover:scale-105 transition-transform">
+          <div class="flex items-center space-x-3 self-start sm:self-center">
+              <div class="px-2 group-hover:scale-105 transition-transform">
                 <img 
                   src="/assets/AwazeLogo0.2.png" 
-                  class=" w-24 h-8 md:h-10"
+                  class=" w-20 h-6 md:w-20 md:h-8"
                   alt="Logo" 
                   @error="onImgError($event, 'https://placehold.co/100x100/0d1410/10b981?text=AWAZE')"
                 />
@@ -16,18 +16,18 @@
           </div>
         </NuxtLink>
 
-        <div class="flex items-center gap-2.5 w-full sm:w-auto sm:max-w-md">
+        <div class="flex items-center gap-2 w-full sm:w-auto sm:max-w-md ml-auto">
           <div class="relative w-full">
-            <svg class="absolute left-3.5 top-3.5 h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="absolute left-2.5 top-3 h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input 
               type="text" 
-              :placeholder="showingDirectory ? (lang === 'am' ? 'ምግብ ቤት ፈልግ...' : 'Search restaurants...') : t('searchPlaceholder')" 
+              :placeholder="showingDirectory ? (lang === 'am' ? 'ምግብ ፈልግ...' : 'Search restaurants...') : t('searchPlaceholder')" 
               v-model="searchQuery"
               @input="showingDirectory ? undefined : scrollToMenu()"
               @focus="showingDirectory ? undefined : scrollToMenu()"
-              class="w-full bg-[#0d1410] border border-emerald-950/80 text-white placeholder-zinc-500 rounded-lg py-2.5 pl-10 pr-10 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition text-sm"
+              class="w-full bg-[#0d1410] border border-emerald-950/80 text-white placeholder-zinc-500 rounded-lg py-2 pl-9 pr-10 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition text-sm"
             />
             <button 
               v-if="searchQuery" 
@@ -43,11 +43,11 @@
           <button 
             @click="toggleLang" 
             type="button"
-            class="px-3 py-2.5 rounded-lg border border-emerald-950/80 bg-[#0d1410] hover:border-emerald-500 text-emerald-400 hover:text-emerald-300 font-bold text-xs transition-all flex items-center justify-center shrink-0 cursor-pointer"
+            class="p-2 rounded-lg border border-zinc-800 bg-[#0d1410] hover:border-emerald-500 hover:text-emerald-300 font-bold text-xs transition-all flex items-center justify-center shrink-0 cursor-pointer"
             aria-label="Toggle Language"
             :title="lang === 'en' ? 'Switch to Amharic' : 'Switch to English'"
           >
-            <span class="flex items-center gap-1.5">
+            <span class="flex items-center gap-1.5 w-5 h-5">
               <span class="font-extrabold tracking-wide">{{ lang === 'en' ? 'አማ' : 'EN' }}</span>
             </span>
           </button>
@@ -55,7 +55,7 @@
           <button 
             @click="toggleTheme" 
             type="button"
-            class="p-2.5 rounded-lg border border-emerald-950/80 bg-[#0d1410] hover:border-emerald-500 text-emerald-400 hover:text-emerald-300 transition-all flex items-center justify-center shrink-0 cursor-pointer"
+            class="p-2 rounded-lg border border-zinc-800 bg-[#0d1410] hover:text-emerald-300 transition-all flex items-center justify-center shrink-0 cursor-pointer"
             aria-label="Toggle Theme"
           >
             <svg v-if="isDark" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -148,24 +148,42 @@
 
       <template v-else>
       
-        <!------    Selected Restaurant Profile     ----->
 
-      <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#0a140f] to-black border border-emerald-950/60 p-4 md:p-8 mb-4">
-        <div class="absolute right-0 top-0 h-full w-full opacity-15 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-400 via-transparent to-transparent"></div>
+
+
+
+
+      <!------   Found Selected Restaurant        ----->
+
+      <!------   Promotion      ----->
+      <div class="w-full h-40 rounded-2xl overflow-hidden border border-zinc-400/50 md:hidden">
+        <img src="/assets/promo.jpg" alt="Promotion" class="object-cover">
+      </div>
+
+      <div class="absolute w-56 ml-12 top-20 left-0 h-2/4 rounded-2xl overflow-hidden border border-zinc-400/50 hidden md:block">
+        <img src="/assets/promow.jpg" alt="Promotion" class="object-cover h-full">
+      </div>
+
+
+      <!------    Selected Restaurant Profile     ----->
+
+      <div class="relative overflow-hidden rounded-xl my-9">
+        <div class="absolute right-0 top-0 h-full w-full opacity-15 pointer-events-none"></div>
         <div class="relative z-10 w-full">
           <div class="flex items-center">
             <NuxtLink to="/menu" class="text-zinc-500 hover:text-emerald-400 text-xs font-bold uppercase tracking-wider shrink-0 self-start mt-1 hidden">←</NuxtLink>
             
-            <div class="flex flex-col">
-              <h2 class="text-white text-2xl md:text-3xl uppercase tracking-wide font-extrabold leading-tight">{{ currentRestaurant.name }}</h2>
-              <span v-if="currentRestaurant.amharicName" class="text-white text-lg md:text-xl font-bold mt-1">{{ currentRestaurant.amharicName }}</span>
-            </div>
             <img 
               :src="currentRestaurant.logo" 
               :alt="currentRestaurant.name + ' logo'"
-              class="h-12 w-12 md:h-14 md:w-14 object-cover shadow-md shrink-0 bg-transparent ml-auto"
+              class="h-12 w-12 md:h-14 md:w-14 object-cover shadow-md shrink-0 bg-transparent mr-4"
               @error="onImgError($event, 'https://placehold.co/100x100/0d1410/10b981?text=LOGO')"
             />
+            <div class="flex flex-col">
+              <h2 class="text-white text-xl md:text-2xl uppercase tracking-wide font-extrabold leading-tight">{{ currentRestaurant.name }}</h2>
+              <span v-if="currentRestaurant.amharicName" class="text-md md:text-md font-bold mt-1">{{ currentRestaurant.amharicName }}</span>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -173,52 +191,59 @@
 
         <!------    Selected Restaurant Profile     ----->
         
-      <div id="menu-list-section" ref="menuListSection" class="scroll-mt-20 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-4 border-b border-emerald-950/40">
-        <div class="flex bg-black p-1 rounded-lg border border-emerald-950 max-w-max">
+      <div id="menu-list-section" ref="menuListSection" class="scroll-mt-20 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 mx-6">
+        <div class="flex rounded-lg max-w-max">
           <button 
             @click="setMenuType('all')"
-            :class="activeType === 'all' ? 'bg-white text-black shadow-lg' : 'text-zinc-400 hover:text-white'"
+            :class="activeType === 'all' ? 'bg-emerald-600 text-black shadow-lg' : 'text-zinc-400 hover:text-white'"
             class="px-5 py-2 rounded-md text-xs font-bold transition-all"
           >
+            <img v-if="isDark" src="/assets/foodw.png" class="w-7 h-7 mx-auto mb-1 fill-none" alt="">
+            <img v-else src="/assets/food.png" class="w-7 h-7 mx-auto mb-1 fill-none" alt="">
             {{ t('fullMenu') }}
           </button>
           <button 
             @click="setMenuType('food')"
             :class="activeType === 'food' ? 'bg-emerald-600 text-black shadow-lg' : 'text-zinc-400 hover:text-white'"
-            class="px-5 py-2 rounded-md text-xs font-bold transition-all flex items-center space-x-1.5"
+            class="px-5 py-2 rounded-md text-xs font-bold transition-all"
           >
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
-            <span>{{ t('foodPlates') }}</span>
+            <img v-if="isDark" src="/assets/dinnerw.png" class="w-7 h-7 mx-auto mb-1" alt="">
+            <img v-else src="/assets/dinner.png" class="w-7 h-7 mx-auto mb-1" alt="">
+            {{ t('foodPlates') }}
           </button>
           <button 
             @click="setMenuType('drinks')"
             :class="activeType === 'drinks' ? 'bg-emerald-600 text-black shadow-lg' : 'text-zinc-400 hover:text-white'"
-            class="px-5 py-2 rounded-md text-xs font-bold transition-all flex items-center space-x-1.5"
+            class="px-5 py-2 rounded-md text-xs font-bold transition-all"
           >
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <span>{{ t('beverages') }}</span>
+            <img v-if="isDark" src="/assets/cocktailw.png" class="w-7 h-7 mx-auto mb-1 fill-none" alt="">
+            <img v-else src="/assets/cocktail.png" class="w-7 h-7 mx-auto mb-1 fill-none" alt="">
+            {{ t('beverages') }}
           </button>
         </div>
       </div>
 
-      <div class="mb-8">
-        <div class="flex space-x-3 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-emerald-950 scrollbar-track-transparent">
+
+
+      <!------   Sub-Categories List     ----->
+        
+
+      <div class="mb-4 mx-6">
+        <div class="flex space-x-3 overflow-x-auto scrollbar-none">
           <button
             v-for="cat in visibleCategories"
             :key="cat.id"
             @click="activeCategory = cat.id"
-            :class="activeCategory === cat.id ? 'bg-emerald-950/80 border-emerald-500 text-white shadow-md' : 'bg-[#0d1410] border-emerald-950/60 hover:border-emerald-800 text-zinc-300'"
+            :class="activeCategory === cat.id ? 'border-emerald-500 text-white shadow-md' : 'bg-[#0d1410] border-emerald-950/60 hover:border-emerald-800 text-zinc-300'"
             class="flex items-center space-x-2 px-5 py-3 rounded-lg border whitespace-nowrap transition-all duration-200"
           >
-            <span v-html="getCategoryIcon(cat.iconName)" :class="activeCategory === cat.id ? 'text-emerald-400' : 'text-zinc-400'" class="h-4 w-4"></span>
             <span class="text-xs font-semibold tracking-wide">{{ getCatName(cat) }}</span>
           </button>
         </div>
       </div>
+
+      <!------    Food / Drink Item Card     ----->
+        
 
       <div v-if="filteredItems.length === 0" class="text-center py-16 bg-[#0d1410] rounded-2xl border border-emerald-950/60 max-w-lg mx-auto px-4">
         <div class="bg-[#101b15] p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-emerald-900/40">
@@ -236,12 +261,12 @@
         </button>
       </div>
 
-      <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mx-6">
         <div 
           v-for="item in filteredItems" 
           :key="item.id"
           @click.stop="selectItem(item)"
-          class="group bg-[#0d1410] border border-emerald-950/60 hover:border-emerald-700/60 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-950/10 cursor-pointer flex flex-col justify-between touch-manipulation active:scale-[0.98] select-none"
+          class="group border border-emerald-950/30 hover:border-emerald-700/40 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-950/10 cursor-pointer flex flex-col justify-between touch-manipulation active:scale-[0.98] select-none"
           role="button"
           tabindex="0"
           @keydown.enter.prevent="selectItem(item)"
@@ -250,15 +275,15 @@
             <img 
               :src="item.image" 
               :alt="getItemMainTitle(item)"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 pointer-events-none"
               @error="onImgError($event, 'https://placehold.co/600x450/0d1410/10b981?text=' + encodeURIComponent(getItemMainTitle(item)))"
             />
             
-            <span class="absolute top-3 left-3 bg-[#050806]/90 text-white border border-emerald-950 text-[10px] font-extrabold px-2.5 py-1 rounded-md backdrop-blur-md">
+            <span class="absolute top-3 left-3 text-white! text-[10px] font-bold px-2.5 py-1 rounded-md backdrop-blur-md">
               {{ getItemTag(item) }}
             </span>
             
-            <span v-if="item.spicy" class="absolute top-3 right-3 bg-red-950/90 text-red-400 border border-red-900/40 text-[10px] font-extrabold px-2 py-1 rounded-md backdrop-blur-md flex items-center">
+            <span v-if="item.spicy" class="absolute top-3 right-3 bg-red-950/40 text-red-400 border border-red-900/40 text-[10px] font-extrabold px-2 py-1 rounded-md backdrop-blur-md flex items-center">
               <svg class="h-3 w-3 mr-0.5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.486 2.58c-.027.205-.052.411-.073.614C7.03 9.242 6.5 8.12 6.5 7A1 1 0 005 6.2a8.035 8.035 0 00-1.785 2.33C2.409 10.03 2 11.47 2 13a7 7 0 1014 0c0-1.502-.409-2.943-1.215-4.47a8.035 8.035 0 00-1.785-2.33s-.336.575-.61 1.258c-.287.712-.52 1.543-.655 2.378-.016.096-.03.19-.041.285a4.774 4.774 0 01-.01.077c-.1.353-.306.66-.583.874a1.004 1.004 0 01-1.218-.12 3.77 3.77 0 01-.937-2.652c.033-.902.164-1.921.393-2.966.223-1.012.545-2.029.932-2.946a9.585 9.585 0 01.91-1.636z" clip-rule="evenodd" />
               </svg>
@@ -266,7 +291,7 @@
             </span>
           </div>
 
-          <div class="p-4 flex-grow flex flex-col justify-between">
+          <div class="p-4 flex-grow flex flex-col justify-between w-full">
             <div>
               <div class="flex items-center justify-between text-xs text-zinc-400 mb-1.5">
                 <span class="text-[10px] font-extrabold tracking-widest text-emerald-400 uppercase">{{ getItemSubCategory(item) }}</span>
@@ -279,34 +304,37 @@
                 </div>
               </div>
 
-              <h3 class="font-bold text-base md:text-base text-white tracking-tight leading-snug group-hover:text-emerald-400 transition-colors">{{ getItemMainTitle(item) }}</h3>
-              <span class="block text-xs font-semibold text-emerald-400/90 mt-0.5 tracking-wide">{{ getItemSubTitle(item) }}</span>
+              <div class="flex">
+                <div>
+                  <h3 class="font-bold text-xl md:text-base text-white tracking-tight leading-snug group-hover:text-emerald-400 transition-colors">{{ getItemMainTitle(item) }}</h3>
+                  <span class="block text-xs font-semibold mt-0.5 tracking-wide">{{ getItemSubTitle(item) }}</span>
+                </div>
+
+                <div class="ml-auto">
+                <span class="font-black text-emerald-400 text-xl md:text-lg">{{ (Number(item.price) || 0).toLocaleString() }} Birr</span>
+              </div>
+              </div>
             </div>
 
-            <div class="flex items-center justify-between pt-3 mt-3 border-t border-emerald-950/40">
-              <div>
-                <span class="text-[10px] text-zinc-500 block uppercase font-semibold">{{ t('price') }}</span>
-                <span class="font-black text-emerald-400 text-base md:text-lg">{{ (Number(item.price) || 0).toLocaleString() }} Birr</span>
-              </div>
-
-              <div class="flex items-center gap-1.5">
+            <div class="flex items-center justify-between pt-3 mt-3">
+              <div class="flex items-center gap-4 ml-auto">
                 <button 
                   type="button" 
                   @click.stop="triggerOrder(item)"
-                  class="bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black px-3 py-1.5 rounded-lg flex items-center space-x-1 transition-colors shadow-md cursor-pointer"
+                  class="bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black px-6 py-1.5 rounded-lg flex items-center space-x-1 transition-colors shadow-md cursor-pointer"
                 >
                   <span>🛒 Order</span>
                 </button>
-                <!----<button 
+                <button 
                   type="button" 
                   @click.stop="selectItem(item)"
-                  class="bg-emerald-950/60 hover:bg-emerald-800/80 text-emerald-400 hover:text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-900/60 flex items-center space-x-1 transition-colors cursor-pointer"
+                  class="hover:bg-emerald-800/80 hover:text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-900 flex items-center space-x-1 transition-colors cursor-pointer"
                 >
-                  <span>{{ t('details') }}</span>
+                  <span>Details</span>
                   <svg class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
-                </button>--->
+                </button>
               </div>
             </div>
           </div>
@@ -318,10 +346,29 @@
 
     </main>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div 
       v-if="selectedItem"
       @click.self="closeModal"
-      class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 md:p-8 overflow-y-auto"
+      class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-5 md:p-8 overflow-y-auto"
     >
       <div 
         @click.stop
@@ -831,7 +878,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted, nextTick, reactive } from 'vue'
 
-const isDark = ref(true)
+const isDark = ref(false)
 const lang = ref('en')
 const activeCategory = ref('all')
 const activeType = ref('all')
