@@ -173,6 +173,7 @@ Actual backend:
 - Make the dashboard actually pull the right information for the selected restaurant from the database.
 - Ordering Page, I want you to connect it with the backend systemm of the restaurants,
 - Make the menu page to not be shown if the restaurant is suspended.
+- Order button on Food Card is only visible if the restaurant has ordering features
 
 
 
@@ -202,3 +203,4 @@ Actual backend:
 - Pre made categories with their images
 - Make the restaurant logo on the menu page pull fron the 
 - Share icon in food
+- Promotions on menu page

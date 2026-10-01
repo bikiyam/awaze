@@ -364,27 +364,29 @@
 
 
 
-
+    <!--------- Food Detail Popup ------->
     <div 
       v-if="selectedItem"
       @click.self="closeModal"
-      class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-5 md:p-8 overflow-y-auto"
+      class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center sm:p-5 md:p-8 overflow-hidden"
     >
       <div 
         @click.stop
-        class="bg-[#0d1410] border border-emerald-800/50 w-full max-w-5xl h-[92vh] max-h-[850px] rounded-2xl overflow-hidden shadow-2xl relative flex flex-col lg:flex-row my-auto"
+        class="bg-[#0d1410] w-full h-full max-w-[1300px] md:h-[92vh] rounded-2xl overflow-hidden shadow-2xl relative flex flex-col lg:flex-row my-auto"
       >
+        <!--------- Close Button ------->
         <button 
           @click="closeModal"
-          class="absolute top-4 right-4 z-20 bg-black/75 hover:bg-black p-2.5 rounded-full text-white border border-emerald-900/60 shadow-lg transition-transform hover:scale-105"
+          class="absolute top-4 right-4 z-20 hover:bg-black p-1 rounded-full border border-emerald-900/60 shadow-lg transition-transform hover:scale-105"
           aria-label="Close detail view"
         >
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        <div class="relative w-full lg:w-1/2 h-64 lg:h-full bg-zinc-900 shrink-0 overflow-hidden">
+        <!--------- image Container ------->
+        <div class="relative w-full lg:w-1/2 h-[350px] lg:h-full bg-zinc-900 shrink-0 overflow-hidden mb-3">
           <img 
             :src="selectedItem.image" 
             :alt="getItemMainTitle(selectedItem)" 
@@ -419,19 +421,9 @@
           </div>
         </div>
 
-        <div class="w-full lg:w-1/2 flex flex-col h-full overflow-y-auto mt-12 mb-24 p-5 sm:p-6 md:p-8 scrollbar-thin">
-          <div class="mb-4">
-            <span class="text-emerald-400 text-xs font-black uppercase tracking-widest">{{ getItemSubCategory(selectedItem) }}</span>
-            <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight mt-1 leading-tight">{{ getItemMainTitle(selectedItem) }}</h2>
-            <p class="text-emerald-400 text-sm md:text-base font-semibold mt-0.5">{{ getItemSubTitle(selectedItem) }}</p>
-            
-            <div class="mt-3 flex items-baseline gap-2">
-              <span class="text-xs text-zinc-400 uppercase font-semibold">{{ t('price') }}:</span>
-              <span class="text-2xl md:text-3xl font-black text-emerald-400">{{ (Number(selectedItem.price) || 0).toLocaleString() }} Birr</span>
-            </div>
-          </div>
-
-          <div class="lg:hidden flex items-center justify-between text-xs text-zinc-300 bg-[#101b15] p-3 rounded-lg border border-emerald-950 mb-5">
+        <div class="w-full flex flex-col h-full overflow-y-auto px-5 pb-16 sm:p-6 md:p-8 scrollbar-none overflow-x-none ">
+          
+          <div class="lg:hidden flex items-center justify-between text-xs text-zinc-300 bg-[#101b15] p-3 py-1.5 rounded-lg border border-emerald-950 mb-3">
             <div class="flex items-center space-x-1 text-amber-400">
               <svg class="h-3.5 w-3.5 fill-amber-400" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -441,19 +433,31 @@
             <span>{{ t('prep') }} {{ selectedItem.prepTime }}</span>
             <span>{{ selectedItem.calories }}</span>
           </div>
+          
+          <div class="mb-4">
+            <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight mt-1 leading-tight">{{ getItemMainTitle(selectedItem) }}</h2>
+            <p class="text-emerald-400 text-sm md:text-base font-semibold mt-0.5">{{ getItemSubTitle(selectedItem) }}</p>
+            
+            <div class="mt-3 flex items-baseline gap-2">
+              <span class="text-xs text-zinc-400 uppercase font-semibold">{{ t('price') }}:</span>
+              <span class="text-2xl md:text-3xl font-black text-emerald-400">{{ (Number(selectedItem.price) || 0).toLocaleString() }} Birr</span>
+            </div>
+            
+            <span class="text-emerald-400 text-xs font-black uppercase tracking-widest">{{ getItemSubCategory(selectedItem) }}</span>
+          </div> 
 
-          <div class="mb-6">
+          <div class="mb-7">
             <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2">{{ t('storyHeader') }}</h3>
-            <p class="text-zinc-300 text-sm leading-relaxed">{{ getItemDescription(selectedItem) }}</p>
+            <p class="text-zinc-300 text-sm leading-5">{{ getItemDescription(selectedItem) }}</p>
           </div>
 
-          <div class="mb-6" v-if="getItemIngredients(selectedItem) && getItemIngredients(selectedItem).length > 0">
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2.5">{{ t('ingredientsHeader') }}</h3>
-            <div class="flex flex-wrap gap-2">
+          <div class="mb-3" v-if="getItemIngredients(selectedItem) && getItemIngredients(selectedItem).length > 0">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2">{{ t('ingredientsHeader') }}</h3>
+            <div class="flex flex-wrap gap-1">
               <span 
                 v-for="(ing, idx) in getItemIngredients(selectedItem)" 
                 :key="idx"
-                class="bg-[#101b15] text-zinc-300 border border-emerald-950 px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1.5"
+                class="bg-[#101b15] text-zinc-300 border border-emerald-950 px-3 py-1 rounded-md text-xs font-medium flex items-center gap-1"
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                 <span>{{ ing }}</span>
@@ -461,8 +465,8 @@
             </div>
           </div>
 
-          <div class="mb-6 bg-[#101b15] p-4 rounded-xl border border-emerald-950" v-if="getItemPairing(selectedItem)">
-            <div class="flex items-center gap-2 mb-1">
+          <div class="mb-6 bg-[#101b15] p-3 rounded-xl border border-emerald-950" v-if="getItemPairing(selectedItem)">
+            <div class="flex items-center gap-2">
               <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
@@ -474,27 +478,27 @@
           <div class="mb-6">
             <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2">{{ t('qualityHeader') }}</h3>
             <div class="grid grid-cols-2 gap-2 text-xs text-zinc-300">
-              <div class="flex items-center space-x-2 bg-[#050806] p-2.5 rounded-lg border border-emerald-950">
+              <div class="flex items-center space-x-2 bg-[#050806] p-1.5 rounded-lg border border-emerald-950">
                 <span class="text-emerald-400">🌿</span>
                 <span>{{ t('q1') }}</span>
               </div>
-              <div class="flex items-center space-x-2 bg-[#050806] p-2.5 rounded-lg border border-emerald-950">
+              <div class="flex items-center space-x-2 bg-[#050806] p-1.5 rounded-lg border border-emerald-950">
                 <span class="text-emerald-400">👨‍🍳</span>
                 <span>{{ t('q2') }}</span>
               </div>
-              <div class="flex items-center space-x-2 bg-[#050806] p-2.5 rounded-lg border border-emerald-950">
+              <div class="flex items-center space-x-2 bg-[#050806] p-1.5 rounded-lg border border-emerald-950">
                 <span class="text-emerald-400">✨</span>
                 <span>{{ t('q3') }}</span>
               </div>
-              <div class="flex items-center space-x-2 bg-[#050806] p-2.5 rounded-lg border border-emerald-950">
+              <div class="flex items-center space-x-2 bg-[#050806] p-1.5 rounded-lg border border-emerald-950">
                 <span class="text-emerald-400">🛡️</span>
                 <span>{{ t('q4') }}</span>
               </div>
             </div>
           </div>
 
-          <div class="mb-6">
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2.5">{{ t('customerFeedback') }}</h3>
+          <div class="mb-6 md:relative md:h-full">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 mb-2.5 ">{{ t('customerFeedback') }}</h3>
             
             <div 
               @click="openCommentsModal = true"
@@ -531,28 +535,28 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
+
+
+
+              <div class=" absolute bottom-0 left-0 py-4 flex gap-2 items-center justify-center w-full backdrop-blur-2xl">
+                <button 
+                  @click="triggerOrder(selectedItem)"
+                  class="bg-emerald-500 hover:bg-emerald-400 text-black text-center font-extrabold text-xs px-30 py-3 rounded-4xl transition shrink-0 cursor-pointer"
+                >
+                  <span>🛒 Order Dish</span>
+                </button>
+                <button 
+                  @click="closeModal"
+                  class="bg-black hover:bg-zinc-900 font-bold text-xs px-4 py-3 rounded-full transition shrink-0 cursor-pointer border border-zinc-800"
+                >
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+            </div>
             </div>
           </div>
-
           <div>
-          
-          <div class=" mt-auto mb-20 pt-4 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-3">
-
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-              <button 
-                @click="triggerOrder(selectedItem)"
-                class=" sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-950/40 shrink-0 cursor-pointer flex items-center justify-center"
-              >
-                <span>🛒 Order Dish</span>
-              </button>
-              <button 
-                @click="closeModal"
-                class="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-bold text-xs px-6 py-3 rounded-lg transition shrink-0 cursor-pointer border border-zinc-800"
-              >
-                {{ t('closeCard') }}
-              </button>
-            </div>
-          </div>
           </div>
 
         </div>
@@ -560,16 +564,22 @@
       </div>
     </div>
 
+
+
+
+
+
+
     <div 
       v-if="openCommentsModal && selectedItem"
       @click.self="openCommentsModal = false"
       class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-lg flex items-center justify-center p-4"
     >
-      <div class="bg-[#0d1410] border border-emerald-800/80 w-full max-w-2xl max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+      <div class=" w-full max-w-2xl max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col">
         
-        <div class="p-5 border-b border-emerald-950/80 flex items-center justify-between bg-[#080f0c]">
+        <div class="p-5 flex items-center justify-between bg-white">
           <div>
-            <h3 class="font-black text-lg text-white">{{ t('allCommentsTitle') }}</h3>
+            <h3 class="font-black text-lg">{{ t('allCommentsTitle') }}</h3>
             <p class="text-xs text-emerald-400 font-semibold">{{ getItemMainTitle(selectedItem) }}</p>
           </div>
           <button 
@@ -582,7 +592,7 @@
           </button>
         </div>
 
-        <div class="p-5 overflow-y-auto space-y-4 flex-grow scrollbar-thin">
+        <div class="p-5 overflow-y-auto space-y-4 flex-grow scrollbar-thin bg-zinc-300">
           <div 
             v-for="comment in getComments(selectedItem)" 
             :key="comment.id"
@@ -593,7 +603,7 @@
                 <div class="w-8 h-8 rounded-full bg-emerald-950 border border-emerald-800 flex items-center justify-center text-emerald-400 font-bold text-xs">
                   <span>{{ comment.author.charAt(0).toUpperCase() }}</span>
                 </div>
-                <span class="font-bold text-sm text-white">{{ comment.author }}</span>
+                <span class="font-bold text-sm text-black">{{ comment.author }}</span>
               </div>
               <span class="text-xs text-zinc-400">{{ comment.date }}</span>
             </div>
@@ -614,12 +624,12 @@
           </div>
         </div>
 
-        <div class="p-4 bg-[#080f0c] border-t border-emerald-950/80">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2.5">{{ t('leaveComment') }}</h4>
+        <div class="p-4 bg-zinc-200">
+          <h4 class="text-xs font-bold uppercase tracking-wider mb-2.5 ">{{ t('leaveComment') }}</h4>
           
           <form @submit.prevent="submitComment(selectedItem)" class="space-y-3">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <input 
+              <input
                 type="text" 
                 v-model="newCommentAuthor" 
                 :placeholder="t('yourNamePlaceholder')" 
@@ -633,8 +643,8 @@
                     v-for="star in 5" 
                     :key="star"
                     @click="newCommentRating = star"
-                    class="h-4 w-4" 
-                    :class="star <= newCommentRating ? 'fill-amber-400 text-amber-400' : 'text-zinc-600'" 
+                    class="h-4 w-4"
+                    :class="star <= newCommentRating ? 'fill-amber-400 text-amber-400' : 'text-zinc-600'"
                     viewBox="0 0 20 20" 
                     fill="currentColor"
                   >
@@ -668,7 +678,7 @@
 
     <section
       v-if="!showingDirectory && !menuLoading && !menuLoadError && currentRestaurant.name"
-      class="max-w-7xl mx-auto px-4 md:px-8 py-12 w-full border-t border-emerald-950/40"
+      class="max-w-7xl mx-auto px-2 md:px-8 py-4 w-full"
     >
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#0d1410] border border-emerald-950/60 rounded-2xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
         
@@ -676,7 +686,7 @@
 
         <div class="lg:col-span-5 flex flex-col justify-center space-y-6 z-10">
           <div class="space-y-2">
-            <span class="text-emerald-400 font-black text-sm tracking-widest uppercase"> / <span>{{ t('aboutUsTag') }}</span></span>
+            <span class="text-emerald-400 font-black text-[12px] tracking-wider uppercase"> / <span>{{ t('aboutUsTag') }}</span></span>
             <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight uppercase">{{ lang === 'am' ? currentRestaurant.amharicName : currentRestaurant.name }}</h2>
           </div>
 
@@ -729,10 +739,8 @@
                 class="h-2 rounded-full transition-all duration-300"
               ></button>
             </div>
-
           </div>
         </div>
-
       </div>
 
       <div 
@@ -758,21 +766,22 @@
 
     <footer
       v-if="!showingDirectory && !menuLoading && !menuLoadError"
-      class="mt-auto border-t border-emerald-950/40 bg-[#030504] py-12 px-4 md:px-8 text-xs text-zinc-400"
+      class="z-10 border-t border-emerald-950/40 bg-[#030504] py-8 px-4 md:px-8 text-xs text-zinc-400"
     >
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center space-x-3">
-          <span class="font-extrabold text-sm tracking-tight text-white uppercase">{{ t('digitalMenu') }}</span>
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+        <div class="flex flex-col items-center md:items-start space-x-3">
+          <img src="/assets/AwazeLogo0.2.png" class="w-20 h-8">
+          <h1 class="font-extrabold text-sm tracking-tight text-white uppercase">{{ t('digitalMenu') }}</h1>
         </div>
-        
+        <!--
         <div class="flex flex-wrap items-center justify-center gap-6 text-zinc-400">
           <span class="hover:text-white transition cursor-pointer">{{ t('standards') }}</span>
           <span class="hover:text-white transition cursor-pointer">{{ t('terms') }}</span>
           <span class="hover:text-white transition cursor-pointer">{{ t('desk') }}</span>
         </div>
-
+         -->
         <div>
-          <p class="text-[11px] text-zinc-500">{{ t('rights') }}</p>
+          <p class="text-[11px] text-zinc-600">{{ t('rights') }}</p>
         </div>
       </div>
     </footer>
@@ -851,15 +860,15 @@
 
             <div class="pt-2 flex justify-end gap-2">
               <button 
-                type="button" 
-                @click="openOrderModal = false"
-                class="px-4 py-2.5 bg-zinc-900 text-zinc-400 text-xs font-bold rounded-xl border border-zinc-800 cursor-pointer"
-              >Cancel</button>
-              <button 
                 type="submit"
                 :disabled="orderSubmitting"
                 class="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-60 disabled:cursor-not-allowed text-black text-xs font-extrabold rounded-xl transition shadow-lg shadow-emerald-950/50 cursor-pointer"
               >{{ orderSubmitting ? 'Sending…' : 'Send Order to Kitchen' }}</button>
+              <div type="button" @click="openOrderModal = false" class="px-4 py-2.5 bg-zinc-900 text-zinc-00 text-xs font-bold rounded-xl border border-zinc-800 cursor-pointer">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
             </div>
           </form>
         </div>
@@ -986,7 +995,7 @@ const i18n = {
     q3: "Authentic Spices",
     q4: "Hygienic Preparation",
     waiterNote: "Need customized spice levels or dietary adaptations? Inform your table waiter.",
-    closeCard: "Close Detail Card",
+    closeCard: "Go Back",
     digitalMenu: "AWAZE DIGITALS",
     standards: "Quality Standards",
     terms: "Terms of Dining",
@@ -994,9 +1003,9 @@ const i18n = {
     rights: "© 2026 Bolale Creatives. All rights reserved.",
     prep: "Prep:",
     reviews: "reviews",
-    customerFeedback: "Customer Ratings & Feedback",
-    viewAllComments: "View all comments",
-    allCommentsTitle: "All Customer Comments",
+    customerFeedback: " Comments / Customer Ratings",
+    viewAllComments: "See all comments",
+    allCommentsTitle: "All Comments",
     leaveComment: "Leave a comment & rating",
     yourNamePlaceholder: "Your full name",
     ratingLabel: "Rating",
@@ -1025,7 +1034,7 @@ const i18n = {
     q4: "በጸዳ ሁኔታ የተዘጋጀ",
     waiterNote: "የቃሪያ መጠን ወይም የዝግጅት ለውጥ ይፈልጋሉ? እባክዎን አሰናጋጅዎን ይንገሩ።",
     closeCard: "ዝጋ",
-    digitalMenu: "አዋዜ ዲጂታል ሜኑ",
+    digitalMenu: "አዋዜ ዲጂታል",
     standards: "የጥራት መመዘኛዎች",
     terms: "የአገልግሎት ደንቦች",
     desk: "የሼፉ ክፍል",
