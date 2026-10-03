@@ -3,66 +3,61 @@
     <div id="app" v-cloak class="flex h-full w-full bg-slate-100 overflow-hidden">
 
         <!-- Sidebar Navigation (Dark themed as per reference) -->
-        <aside class="fixed h-screen w-20 lg:w-64 bg-black text-slate-300 bg-linear-to-b from-obsidian-900 to-black border border-gray-800 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20  rounded-br-3xl rounded-tr-3xl">
+        <aside class="fixed h-screen w-18 lg:w-56 bg-black text-slate-300 flex flex-col justify-between flex-shrink-0 transition-all duration-300 shadow-xl z-20 rounded-br-xl rounded-tr-xl">
             <div>
                 <!-- Logo Header -->
                 <NuxtLink to="/">
-                  <div class=" px-2 md:px-7 py-7 group-hover:scale-105 transition-transform">
-                    <img src="/assets/AwazeLogo0.2.png" class=" md:w-18 w-20 h-7" alt="Logo">
+                  <div class="py-7 md:pl-2 hover:scale-105 flex items-center justify-center w-full transition-transform">
+                    <img src="/assets/AwazeLogo0.2.png" class="w-12 h-5 md:mr-auto" alt="Logo">
                   </div>
                 </NuxtLink>
 
                 <!-- Navigation Links -->
-                <nav class="py-3 pl-5 px-2 space-y-7 mt-4">
-                    <button @click="currentTab = 'status'" :class="currentTab === 'status' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
-                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">D</h1>
-                        <span class="hidden lg:block">Dashboard</span>
+                <nav class="py-3 px-2 space-y-7 mt-4">
+                    <button @click="currentTab = 'status'" :class="currentTab === 'status' ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 p-2 rounded-xl transition-all font-medium text-sm">
+                        <img src="/assets/dash.png" class="py-0.5 w-7 h-8 mx-auto md:mx-0">
+                        <span class="hidden lg:block font-bold">Dashboard</span>
                     </button>
-                    <button @click="currentTab = 'items'" :class="currentTab === 'items' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
-                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">M</h1>
-                        <span class="hidden lg:block">Menu Items</span>
+                    <button @click="currentTab = 'items'" :class="currentTab === 'items' ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <img src="/assets/items.png" class="py-0.5 w-7 h-8 mx-auto md:mx-0">
+                        <span class="hidden lg:block font-bold">Menu Items</span>
                     </button>
-                    <button @click="currentTab = 'notification'" :class="currentTab === 'notification' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm relative">
-                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black py-2">N</h1>
-                        <span class="hidden lg:block">Notification</span>
+                    <button @click="currentTab = 'notification'" :class="currentTab === 'notification' ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm relative">
+                        <img src="/assets/not.png" class="py-0.5 w-7 h-8 mx-auto md:mx-0">
+                        <span class="hidden lg:block font-bold">Notification</span>
                         <span v-if="unreadCount > 0" class="absolute right-3 lg:right-4 top-3 px-1.5 py-0.5 bg-rose-500 text-white text-[10px] rounded-full font-bold">{{ unreadCount }}</span>
                     </button>
-                    <button @click="currentTab = 'analytics'" :class="currentTab === 'analytics' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
-                        <h1 class="font-extrabold text-center w-full  md:w-12 rounded-2xl bg-gray-200 text-black  py-2">A</h1>
-                        <span class="hidden lg:block">Analytics</span>
+                    <button @click="currentTab = 'analytics'" :class="currentTab === 'analytics' ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <img src="/assets/statistics.png" class="py-0.5 w-7 h-8 mx-auto md:mx-0">
+                        <span class="hidden lg:block font-bold">Analytics</span>
                     </button>
-                    <button @click="currentTab = 'subscription'" :class="currentTab === 'subscription' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
-                        <h1 class="font-extrabold text-center w-full md:w-12 rounded-2xl bg-gray-200 text-black py-2 hover:scale-110">S</h1>
-                        <span class="hidden lg:block">Subscription</span>
+                    <button @click="currentTab = 'subscription'" :class="currentTab === 'subscription' ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <img src="/assets/sub.png" class="py-0.5 w-7 h-8 mx-auto md:mx-0">
+                        <span class="hidden lg:block font-bold">Subscription</span>
                     </button>
-                    <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
-                        <h1 class="font-extrabold text-center w-full md:w-12 rounded-2xl bg-gray-200 text-black py-2">S</h1>
-                        <span class="hidden lg:block">Settings</span>
+                    <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-600/30' : 'hover:bg-slate-900'" class="w-full flex items-center gap-4 px-2 py-3 rounded-xl transition-all font-medium text-sm">
+                        <img src="/assets/set.png" class="py-0.5 w-7 h-8 mx-auto md:mx-0">
+                        <span class="hidden lg:block font-bold">Settings</span>
                     </button>
                 </nav>
             </div>
 
             <!-- Bottom User Mini Profile / Logout -->
             <div class="p-4 border-t border-slate-800 flex items-center justify-between">
-                <div class="hidden lg:flex items-center gap-3">
-                    <img :src="restaurant.image || 'https://placehold.co/100x100/10b981/ffffff?text=Res'" class="w-9 h-9 rounded-full object-cover border border-slate-700" alt="Avatar">
-                    <div class="overflow-hidden">
-                        <p class="text-xs font-bold text-white truncate">{{ restaurant.name }}</p>
-                        <p class="text-[10px] text-slate-400 truncate">{{ restaurant.phone }}</p>
-                    </div>
-                </div>
-                <button @click="logout" title="Log Out" class="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-all mx-auto lg:mx-0">
-                    <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                
+                <button @click="logout" title="Log Out" class="flex items-center justify-center p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-all mx-auto lg:mx-0">
+                    <h1 class="hidden md:block font-bold sm:hidden">Log Out</h1>
+                    <img src="/assets/logout.png" class="py-0.5 w-7 h-7 ml-auto md:mx-0">
                 </button>
             </div>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 flex flex-col h-full overflow-hidden pl-20 lg:pl-64 bg-black">
+        <main class="flex-1 flex flex-col h-full overflow-hidden bg-zinc-200">
             <!-- Top Navbar matching Frame 7 reference -->
-            <header class="fixed h-20 bg-black border-b border-slate-200 px-6 flex items-center justify-between flex-shrink-0 shadow-sm z-10 w-full lg:pr-72 text-white">
-                <div class="flex items-center gap-4 w-1/3">
-                    <h2 class="text-xl font-bold capitalize">{{ currentTabTitle }}</h2>
+            <header class="fixed h-20 px-6 pl-22 lg:pl-64 flex items-center justify-between flex-shrink-0 shadow-sm z-10 w-full lg:pr-72 text-black bg-white/50 backdrop-blur-3xl">
+                <div class="flex items-center gap-4 w-full ">
+                    <h2 class="text-xl font-black capitalize">{{ currentTabTitle }}</h2>
                 </div>
 
                 <!-- Global Search & User info -->
@@ -83,7 +78,7 @@
             </header>
 
             <!-- Scrollable Viewport Container -->
-            <div class="flex-1 overflow-y-auto p-6 lg:p-8 mt-20">
+            <div class="flex-1 overflow-y-auto p-6 lg:p-8 mt-20 pl-20 lg:pl-64 bg-zinc-300">
 
                 <!-- TOAST / MESSAGE BOX -->
                 <div v-if="toast.show" :class="toast.type === 'error' ? 'bg-rose-500 text-white' : 'bg-emerald-600 text-white'" class="fixed bottom-6 right-6 px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50 transition-all animate-bounce">
@@ -94,10 +89,10 @@
                 <!-- ================= SUB-PAGE 1: STATUS (DASHBOARD) ================= -->
                 <div v-if="currentTab === 'status'" class="space-y-6">
                     <!-- Top Metrics Cards (Sales, Orders, Customers, Tables, Rooms) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                         <!-- Total Sales Card -->
                         <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                            <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                            <div class="absolute right-4 top-4 w-8 h-8 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-wallet text-xl"></i>
                             </div>
                             <p class="text-xs font-black uppercase tracking-wider">Total Views</p>
@@ -109,8 +104,8 @@
                         </div>
 
                         <!-- Total Orders Card -->
-                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                            <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-4 rounded-2xl shadow-lg relative overflow-hidden">
+                            <div class="absolute right-4 top-4 w-8 h-8 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-cart-shopping text-xl"></i>
                             </div>
                             <p class="text-xs font-black uppercase tracking-wider">Total Orders</p>
@@ -122,8 +117,8 @@
                         </div>
 
                         <!-- Menu Stats Card -->
-                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                            <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-4 rounded-2xl shadow-lg relative overflow-hidden">
+                            <div class="absolute right-4 top-4 w-8 h-8 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-utensils text-xl"></i>
                             </div>
                             <p class="text-xs font-black uppercase tracking-wider">Foods & Drinks / Categories</p>
@@ -135,26 +130,26 @@
                         </div>
 
                         <!-- Tables Card -->
-                        <div v-if="settings.orderingOption" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                            <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <div v-if="settings.orderingOption" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-4 rounded-2xl shadow-lg relative overflow-hidden">
+                            <div class="absolute right-4 top-4 w-8 h-8 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-chair text-xl"></i>
                             </div>
                             <p class="text-xs font-black uppercase tracking-wider">Active Tables</p>
                             <h3 class="text-3xl font-extrabold mt-2">{{ tablesCount }}</h3>
-                            <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
+                            <div class="mt-auto flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-qrcode"></i>
                                 <span>QR Enabled</span>
                             </div>
                         </div>
 
                         <!-- Rooms Card -->
-                        <div v-if="settings.roomIntegration" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                            <div class="absolute right-4 top-4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <div v-if="settings.roomIntegration" class="bg-gradient-to-br from-emerald-500 to-teal-600 text-black p-4 rounded-2xl shadow-lg relative overflow-hidden">
+                            <div class="absolute right-4 top-4 w-8 h-8 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                                 <i class="fa-solid fa-hotel text-xl"></i>
                             </div>
                             <p class="text-xs font-black uppercase tracking-wider">Hotel Rooms</p>
                             <h3 class="text-3xl font-extrabold mt-2">{{ roomsCount }}</h3>
-                            <div class="mt-4 flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
+                            <div class="mt-auto flex items-center gap-1.5 text-xs bg-white/20 px-2.5 py-1 rounded-lg w-max backdrop-blur-sm">
                                 <i class="fa-solid fa-door-open"></i>
                                 <span>Room Service QR</span>
                             </div>
@@ -164,7 +159,7 @@
                     <!-- Quick Overview Grids (Charts & Tables) -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Left 2 cols: Customer Satisfaction / Revenue Trend -->
-                        <div class="lg:col-span-2 bg-linear-to-b from-black to-obsidian-900 border border-slate-700 p-6 rounded-2xl shadow-sm">
+                        <div class="lg:col-span-2 bg-white text-black p-6 rounded-2xl shadow-sm">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="font-bold text-lg">Customer Satisfaction & Sales Flow</h3>
                                 <span class="text-xs font-medium text-black bg-emerald-50 px-3 py-1 rounded-full">Live Analytics</span>
@@ -175,24 +170,24 @@
                         </div>
 
                         <!-- Right 1 col: Branch & Status info -->
-                        <div class="bg-linear-to-b from-black to-obsidian-900  p-6 rounded-2xl shadow-sm flex flex-col justify-between text-white">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col justify-between text-black">
                             <div>
                                 <h3 class="font-bold text-lg mb-2">Restaurant Profile</h3>
                                 <p class="text-xs text-slate-500 mb-4">{{ restaurant.description }}</p>
                                 <div class="space-y-3">
-                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
+                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-300">
                                         <span class="text-slate-500">Location</span>
                                         <span class="font-semibold ">{{ restaurant.location }}</span>
                                     </div>
-                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
+                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-300">
                                         <span class="text-slate-500">Phone</span>
                                         <span class="font-semibold ">{{ restaurant.phone }}</span>
                                     </div>
-                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
+                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-300">
                                         <span class="text-slate-500">Branch Status</span>
                                         <span class="font-semibold ">{{ settings.restaurantBranch ? 'Multi-Branch Active' : 'Single Location' }}</span>
                                     </div>
-                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-100">
+                                    <div class="flex items-center justify-between text-sm py-2 border-b border-slate-300">
                                         <span class="text-slate-500">Plan</span>
                                         <span class="font-semibold">Premium</span>
                                     </div>
@@ -204,14 +199,14 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
-                      <div class="h-50 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
+                      <div class="h-50 bg-linear-to-b from-black to-zinc-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
                       <div></div>
-                      <div class="h-50 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
+                      <div class="h-50 bg-linear-to-b from-black to-zinc-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
                       <div class="h-20"></div>
-                      <div class="h-72 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
-                      <div class="h-56 bg-linear-to-b from-black to-obsidian-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
+                      <div class="h-72 bg-linear-to-b from-black to-zinc-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
+                      <div class="h-56 bg-linear-to-b from-black to-zinc-900 text-white border border-gray-800 items-center text-center font-semibold rounded-2xl justify-center py-4">Dashboard Item<br><span class="text-sm font-light">Coming soon!</span></div>
                     </div>
                     
                 </div>
@@ -235,28 +230,28 @@
                     </div>
 
                     <!-- Foods Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div v-for="food in filteredFoods" :key="food.id" class="bg-slate-300 rounded-2xl shadow-sm border border-slate-700 overflow-hidden flex flex-col justify-between hover:shadow-md transition-all group">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div v-for="food in filteredFoods" :key="food.id" class="bg-white rounded-2xl shadow-sm border border-slate-700 overflow-hidden flex flex-col justify-between hover:shadow-md transition-all group">
                             <div>
                                 <div class="relative h-48 overflow-hidden bg-slate-100">
                                     <img :src="food.image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Food">
-                                    <span class="absolute top-3 left-3 px-3 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-semibold rounded-lg">{{ food.category }}</span>
-                                    <span class="absolute top-3 right-3 px-3 py-1 bg-emerald-600 text-white text-xs font-bold rounded-lg shadow">${{ food.price }}</span>
+                                    <span class="absolute top-3 left-2 px-3 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-semibold rounded-lg">{{ food.category }}</span>
+                                    <span class="absolute top-3 right-2 px-3 py-1 bg-emerald-600 text-white text-xs font-bold rounded-lg shadow">{{ food.price }} birr</span>
                                 </div>
-                                <div class="p-5">
-                                    <h4 class="font-bold text-slate-800 text-lg truncate">{{ food.name }}</h4>
+                                <div class="p-2.5">
+                                    <h4 class="font-bold text-slate-800 text-sm md:text-lg truncate">{{ food.name }}</h4>
                                     <p class="text-xs text-slate-500 mt-1 line-clamp-2">{{ food.description }}</p>
                                 </div>
                             </div>
-                            <div class="p-5 pt-0 flex items-center justify-between">
-                                <button @click="viewFoodDetails(food)" class="text-xs font-black text-white bg-black px-6 py-3 rounded-2xl hover:scale-105">
-                                    <i class="fa-solid fa-eye"></i> View Details
+                            <div class="p-2 pt-0 flex items-center justify-end gap-2">
+                                <button @click="viewFoodDetails(food)" class="text-xs font-black text-white bg-black px-2.5 py-2 rounded-xl hover:scale-105">
+                                    <h1 class="text-[12px]">Details</h1>
                                 </button>
-                                  <button @click="editFood(food)" class="text-xs font-black text-black bg-white px-6 py-3 rounded-2xl hover:scale-105" title="Edit">
-                                      <i class="fa-solid fa-pen text-sm"></i>Edit
+                                  <button @click="editFood(food)" class="text-xs font-black px-2 py-2 rounded-2xl hover:scale-105" title="Edit">
+                                    <img src="assets/edit.png" class="w-5 h-5">
                                   </button>
-                                  <button @click="deleteFood(food.id)" class="text-xs font-black text-black bg-white px-6 py-3 rounded-2xl hover:scale-105" title="Delete">
-                                      <i class="fa-solid fa-trash text-sm"></i>Delete
+                                  <button @click="deleteFood(food.id)" class="text-xs font-black px-2 py-2 rounded-2xl hover:scale-105" title="Delete">
+                                    <img src="assets/del.png" class="w-5 h-5">
                                   </button>
                             </div>
                         </div>
@@ -265,37 +260,36 @@
 
                 <!-- ================= SUB-PAGE 3: NOTIFICATION (ACTIVITY & COMMENTS) ================= -->
                 <div v-if="currentTab === 'notification'" class="space-y-6 min-h-screen overflow-y-hidden">
-                    <div class="flex items-center justify-between bg-black text-white p-6 rounded-2xl shadow-sm border border-slate-700">
+                    <div class=" bg-black text-white p-6 rounded-2xl shadow-sm border border-slate-700">
                         <div>
                             <h3 class="text-xl font-bold">Customer Activity & Feedback</h3>
-                            <p class="text-xs text-slate-500 mt-1">Real-time comments, ratings, and customer reviews on your menu.</p>
+                            <p class="text-xs text-slate-500">Real-time comments, ratings, and customer reviews on your menu.</p>
                         </div>
-                        <button @click="markAllNotificationsRead" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-all">
+                        <button @click="markAllNotificationsRead" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-all mt-2">
                             Mark All as Read
                         </button>
                     </div>
 
                     <div class="space-y-4">
-                        <div v-for="notif in notifications" :key="notif.id" :class="notif.unread ? 'border-l-4 border-white bg-slate-200' : 'bg-slate-400'" class="p-5  rounded-2xl shadow-sm border border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+                        <div v-for="notif in notifications" :key="notif.id" :class="notif.unread ? 'border-l-8 border-black bg-slate-200' : 'bg-white'" class="p-3  rounded-2xl shadow-sm border border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
                             <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center font-bold text-lg ">
-                                    <i class="fa-solid fa-comment-dots"></i>S
+                                <div class="rounded-full bg-black p-2 pb-0 w-12 h-12">
+                                    <div class=""><img src="assets/user.png" class="w-full h-full object-cover"></div>
                                 </div>
-                                <div>
+                                <div> 
                                     <div class="flex items-center gap-2">
                                         <h4 class="font-bold text-slate-800 text-sm">{{ notif.author }}</h4>
                                         <span class="text-xs text-slate-400">• {{ notif.time }}</span>
+                                        <div class="flex items-center gap-3 self-end sm:self-center">
+                                          <div class="flex items-center gap-1 bg-amber-50 text-amber-600 px-3 py-1.5 rounded-xl text-xs font-bold border border-amber-200">
+                                            <span>{{ notif.rating }} / 5.0</span>
+                                          </div>
+                                        </div>
                                     </div>
                                     <p class="text-xs text-emerald-700 font-medium mt-0.5">Commented on: <strong class="underline">{{ notif.foodName }}</strong></p>
-                                    <p class="text-sm text-slate-600 mt-2 italic bg-white p-3 rounded-xl border border-slate-200">"{{ notif.comment }}"</p>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-3 self-end sm:self-center">
-                                <div class="flex items-center gap-1 bg-amber-50 text-amber-600 px-3 py-1.5 rounded-xl text-xs font-bold border border-amber-200">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>{{ notif.rating }} / 5.0</span>
-                                </div>
-                            </div>
+                            <p class="text-sm text-slate-600 italic bg-white p-2 rounded-xl border border-slate-200">"{{ notif.comment }}"</p>
                         </div>
                     </div>
                 </div>
@@ -309,7 +303,7 @@
                         </div>
 
                         <!-- Identity Form -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
+                        <div class="grid grid-cols-2 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Restaurant Name</label>
                                 <input v-model="restaurant.name" type="text" class="w-full px-4 py-3 bg-slate-200 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-black">
@@ -397,7 +391,7 @@
                 <!-- ================= SUB-PAGE 5: ANALYTICS ================= -->
                 <div v-if="currentTab === 'analytics'" class="space-y-6">
                     <!-- Top Metric Cards for Analytics -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         <div class="bg-slate-200 p-6 rounded-2xl shadow-sm border border-slate-200">
                             <p class="text-xs font-bold text-slate-400 uppercase">QR Scans / Page Views</p>
                             <h3 class="text-3xl font-extrabold text-slate-800 mt-2">24,850</h3>

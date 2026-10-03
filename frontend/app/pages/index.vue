@@ -513,20 +513,19 @@ const menuLink = '/menu'
         
         <!-- Column 1: Brand Info -->
         <div class="md:col-span-5 space-y-4">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-linear-to-tr from-brand-500 to-amber-500 p-[2px] shadow-lg shadow-brand-500/20">
-              <div class="w-full h-full bg-obsidian-950 rounded-[9px] flex items-center justify-center font-black text-brand-400 text-lg">A</div>
-            </div>
-            <div>
-              <span class="font-black text-xl tracking-tight text-white uppercase leading-none block">AWAZE</span>
-              <span class="text-brand-400 text-[8px] uppercase font-bold tracking-widest">Smart Menu Platform</span>
-            </div>
-          </div>
-          <p class="text-xs text-zinc-400 font-medium leading-relaxed max-w-sm">
-            Empowering restaurants, lounges, cafes, and hotels in Ethiopia with contactless, visually engaging digital menus that reduce overhead costs and boost average bill sizes.
-          </p>
-          <div class="text-[10px] text-zinc-500 uppercase font-bold tracking-wider pt-2">
-            <span>Supported by Bolale Creatives Group</span>
+          <div>
+            <NuxtLink to="/">
+              <div class="flex items-center space-x-3 self-start sm:self-center">
+                  <div class="px-2 group-hover:scale-105 transition-transform">
+                    <img 
+                      src="/assets/AwazeLogo0.2.png" 
+                      class=" w-20 h-8 md:w-20 md:h-8"
+                      alt="Logo" 
+                      @error="onImgError($event, 'https://placehold.co/100x100/0d1410/10b981?text=AWAZE')"
+                    />
+                  </div>
+              </div>
+            </NuxtLink>
           </div>
         </div>
 
@@ -558,36 +557,36 @@ const menuLink = '/menu'
         </div>
 
         <!-- Column 3: Social Media List -->
-        <div class="md:col-span-3 space-y-4">
+        <div class="md:col-span-3">
           <h4 class="text-xs font-black uppercase text-white tracking-widest text-amber-400 mb-4 flex items-center space-x-2">
             <i class="fa-solid fa-share-nodes"></i>
             <span>Follow Us</span>
           </h4>
 
-          <div class="grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-wider">
+          <div class="grid grid-cols-6 md:grid-cols-2 gap-4 md:gap-2 text-xs font-bold uppercase tracking-wider">
             <a href="#" class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-brand-500 hover:text-black border border-zinc-800 text-zinc-300 flex items-center space-x-2 transition-all">
               <i class="fa-brands fa-telegram text-sky-400"></i>
-              <span class="text-[10px] text-zinc-500">Telegram</span>
+              <span class="text-[10px] text-zinc-500 hidden md:block">Telegram</span>
             </a>
             <a href="https://www.instagram.com/awaze_dm?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-brand-500 hover:text-black border border-zinc-800 text-zinc-300 flex items-center space-x-2 transition-all">
               <i class="fa-brands fa-instagram text-pink-400"></i>
-              <span class="text-[10px]">Instagram</span>
+              <span class="text-[10px] hidden md:block">Instagram</span>
             </a>
             <a href="#" class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-brand-500 hover:text-black border border-zinc-800 text-zinc-300 flex items-center space-x-2 transition-all">
               <i class="fa-brands fa-tiktok text-emerald-400"></i>
-              <span class="text-[10px] text-zinc-500">TikTok</span>
+              <span class="text-[10px] text-zinc-500 hidden md:block">TikTok</span>
             </a>
             <a href="#" class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-brand-500 hover:text-black border border-zinc-800 text-zinc-300 flex items-center space-x-2 transition-all">
               <i class="fa-brands fa-whatsapp text-green-400"></i>
-              <span class="text-[10px] text-zinc-500">WhatsApp</span>
+              <span class="text-[10px] text-zinc-500 hidden md:block">WhatsApp</span>
             </a>
             <a href="#" class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-brand-500 hover:text-black border border-zinc-800 text-zinc-300 flex items-center space-x-2 transition-all">
               <i class="fa-brands fa-linkedin text-blue-400"></i>
-              <span class="text-[10px] text-zinc-500">LinkedIn</span>
+              <span class="text-[10px] text-zinc-500 hidden md:block">LinkedIn</span>
             </a>
             <a href="#" class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-brand-500 hover:text-black border border-zinc-800 text-zinc-300 flex items-center space-x-2 transition-all">
               <i class="fa-brands fa-facebook text-indigo-400"></i>
-              <span class="text-[10px] text-zinc-500">Facebook</span>
+              <span class="text-[10px] text-zinc-500 hidden md:block">Facebook</span>
             </a>
           </div>
         </div>
@@ -595,11 +594,13 @@ const menuLink = '/menu'
       </div>
 
       <!-- Bottom Copyright & Back To Top -->
-      <div class="border-t border-brand-900/30 bg-obsidian-950 py-6 px-6">
+      <div class=" py-6 px-6">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-black text-zinc-500 uppercase tracking-widest">
           <span>© 2026 Bolale Creatives • Addis Ababa, Ethiopia •<span class="normal-case font-normal text-zinc-400">አዲስ አበባ፣ ኢትዮጵያ</span></span>
-          <div class="flex space-x-6">
+          <div>
+            <NuxtLink to="/">
             <a href="#deliverables" class="hover:text-brand-400 transition-colors">Top of Page ↑</a>
+            </NuxtLink>
           </div>
         </div>
       </div>
